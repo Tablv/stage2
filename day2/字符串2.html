@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串2</title>
+</head>
+<body>
+	<script>
+	var str1 = 'hello world';
+	console.log(str1.substring(6));
+	console.log(str1.substr(6,5));
+	var str_list = str1.split(" ");
+	console.log(str_list);
+
+	
+	
+
+	//做一个字符串的reverse函数
+	console.log(str1.split("").reverse().join(""));
+	var str2 = "hello world hello";
+	console.log(str2.indexOf("hello")); //0
+	console.log(str2.indexOf("hello",2));//12
+
+	// 定义一个函数,返回关键字出现的所有位置
+	var fromi = 0;
+	result =[];
+	while(true){
+		var ind = str2.indexOf("hello",fromi);
+		//退出条件是查找不到的时候
+		if(ind == -1){
+			break;
+		}
+		result.push(ind);
+		fromi = ind+1;
+	}
+	console.log(result);
+
+
+	//字符串中的字符去重
+	var str3 = '123423124236';
+	var str4 = '';
+	for(i in str3){
+		if(str4.indexOf(str3[i]) == -1){
+			str4+=str3[i];
+		}
+	}
+	console.log(str4);
+	</script>
+</body>
+</html>

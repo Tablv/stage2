@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学码思</title>
+</head>
+<body>
+	<script>
+	//定义三个类型  person student  xmsstu
+	//person  --- pname 和 age
+	//student --- school 和 函数'努力学习'
+	//xmsstu  --- type(web) 和 score
+	//自我介绍内容,我是xx,几年xx岁,来自xx学校,在学码思学习xx,学习情况[很好>90;较好>80;一般>60;什么都没学会<60]
+	
+
+
+	//定义person
+	function Person(pname,age){
+		this.pname = pname;
+		this.age = age;
+		this.__proto__.sex = '不男不女';
+	}
+	//定义Student
+	function Student(pname,age,school){
+		this.school = school;
+		this.showTime =function(){
+			console.log("努力学习,天天向上");
+		}
+		//this是本对象,this.__protp__指向原型对象(父类)
+		this.__proto__ = new Person(pname,age);
+	}
+	//定义Xmsstu
+	function Xmsstu(pname,age,school,type,score){
+		this.type = type;
+		this.score = score;
+		this.__proto__ = new Student(pname,age,school);
+		this.toShow = function(){
+			//评价
+			if(this.score >= 90){
+				p = '很好';
+			}else if(this.score >=80){
+				p = '较好';
+			}else if(this.score >=60){
+				p = '一般';
+			}else{
+				p = '什么都没学会';
+			}
+			console.log("我是"+this.pname+","+this.age+"岁,来自"+this.school+"学校,在学码思学习"+this.type+",学习情况"+p);
+		}
+	}
+
+	var xmsstu = new Xmsstu('A',200,'啦啦啦','web','75');
+	console.log(xmsstu.__proto__.__proto__)
+	xmsstu.toShow();
+	</script>
+</body>
+</html>

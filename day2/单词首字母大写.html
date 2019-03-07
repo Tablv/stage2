@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//在一个句子中,每个单词首字母大写
+	//分隔符不在限制为,而是锁哥标点符合的字符?!;
+
+	// var p_list = p.split(/\W/);
+
+	// for(i in p_list){
+	// 	if(p_list[i] != " "){
+	// 		p_list[i]=p_list[i].slice(0,1).toUpperCase()+p_list[i].slice(1);
+	// 	}
+		
+	// }
+
+	// console.log(p_list);
+	
+	// 思路
+	// 首字母 : 前一个字符是分隔符的字母
+
+	var sstr = "fds fsdsd fsdf s";
+	var splitArr = [' ',',','.','!','?','/','"','}'];
+	var tstr = sstr[0].toUpperCase();
+	for(var i=1;i<sstr.length;i++){
+		var existIndex = splitArr.indexOf(sstr[i-1]);
+		if(existIndex != -1){
+			tstr = tstr.concat(sstr[i].toUpperCase())
+		}else{
+			tstr = tstr.concat(sstr[i]);
+		}
+	}
+	</script>
+</body>
+</html>

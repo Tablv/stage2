@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组中重复数据</title>
+</head>
+<body>
+	<script>
+	// var arr = ["hello","xms","world","hello","xms","xms"];
+	// var arr1 =[];
+	// for(i in arr){
+	// 	if(arr1.indexOf(arr[i]) == -1){
+	// 		arr1.push(arr[i]);
+	// 	}else{
+	// 		console.log(arr[i],arr1.indexOf(arr[i]),i);
+	// 	}
+	// }
+
+
+
+
+
+
+// -------------------------------------------------------------
+	var arr = ["hello","xms","world","hello","xms","xms"];
+	var result =[];
+	var arr1=[]; //存result下标
+	for(i in arr){
+		if(arr1.indexOf(arr[i]) == -1){
+			arr1.push(arr[i]); 
+			result[arr[i]] = [i]; 
+		}else{
+			result[arr[i]].push(i);
+		}
+	}
+
+	
+	for(i in result){
+		console.log(i,result[i])
+	}
+
+
+	// for(var i =0;i<arr.length-1;i++){
+	// 	for(var j=i+1;j<arr.length;j++){
+	// 		if(arr[i] == arr[j]){
+	// 			result[arr[i]] = [i,j];
+	// 		}
+	// 	}
+	// }
+	// for(i in result){
+	// 	console.log(i,result[i])
+	// }
+	// console.log(result);
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>改写splice</title>
+</head>
+<body>
+	<script>
+	//splice  
+	//删除 参数1-2两个
+	//插入 第二参数0;就是删除的个数是0,后面的参数是要插入的内容
+	//替换 第二个参数 等于后面要插入的参数的个数
+
+	//eg:定义一个函数,需要告诉使用者,目前的操作是删除,还是添加或者替换
+	function mySplice(arr){
+		//根据arguments的个数\第二个参数的值来,判断是什么操作
+		function inner(num){
+			var args = arguments.length;
+			var can=[];
+			for(var i=0;i<args;i++){
+				can.push(arguments[i]);
+			}
+			// console.log(can.join(",")); //1,2,1,2  这他妈的是个字符串
+			// arr.splice(can.join(","));
+			//上eval函数,nb
+			var str = 'arr.splice('+can.join(',')+')';
+			console.log(str);
+			eval(str);
+			//两个参数
+			if(args <=2 ){
+			// 删除操作
+			console.log("删除操作",arr);
+			}else if(arguments[1] == 0){
+			//插入操作
+			console.log("插入操作",arr);
+			}else if(arguments[1] == args-2){
+			//替换操作
+			console.log("替换操作",arr);
+			}else{
+			console.log("其他操作",arr);
+			}
+			return arr;
+		}
+		return inner;
+	}
+	//定义一个数组
+	var arr = [1,2,6,55,1];
+	console.log(arr);
+	//调用函数
+	var result = mySplice(arr);
+	result(1,0,1,2);
+	result(1,0,1,2);
+	</script>
+</body>
+</html>

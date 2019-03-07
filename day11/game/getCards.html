@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //定义一张牌
+    function Card(point,colour){
+		//point 点数 定义为number 因为点数是用来比较的
+		//colour 花色 定义为number
+		this.point = point;
+		this.colour = colour;
+		this.show = function(){
+			//全部点数,命名0+点数
+			var points ='02030405060708091011121314';
+			//花色 方片 梅花 红心 黑桃
+			var colours = ['diamond','club','heart','spade'];
+
+			var tmpStr = colours[this.colour]+points.substr((this.point-2)*2,2);
+			return "<img src='static/"+tmpStr+".jpg'/>";
+		}
+	}
+    //初始化一副牌
+	function createCards(){
+		var cards = [];
+		for(var i=0;i<4;i++){
+			for(var j=2;j<15;j++){
+				cards.push(new Card(j,i));
+			}
+		}
+		return cards;
+	}
+    var cards = new createCards();
+    var result = '';
+    //随机拿三张
+    for(var i=0;i<3;i++){
+        var rande = Math.round(Math.random()*(51-i));
+        result+=cards[rande].show();
+        cards.splice(rande,1);
+    }
+    //联系服务端
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','http://172.17.13.39:8000/get_cards.html');
+    xhr.send('result:'+result);
+    xhr.onreadystatechange = function(){
+        if(xhr.status==200&&xhr.readyState==4){
+            console.log("发送成功!")
+        }
+    }
+</script>
+</body>
+</html>

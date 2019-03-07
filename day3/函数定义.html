@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数定义</title>
+</head>
+<body>
+	<script>
+
+	//函数定义方式
+	//1.声明定义
+	function func(){
+		console.log("funciont shi wang ba dan ");
+	}
+
+
+	func();  // 函数调用
+
+	//2.函数直接量
+	var fun2 = function(){
+		console.log("fun2 被调用了")
+	}
+	console.log(fun2);
+	fun2(); //调用函数
+
+
+	// 3.new 创建函数
+	var fun3 = new Function(console.log('function3被调用了'));
+		console.log('fun3 被调用');
+		fun3();
+
+	// 4.函数变量一块传递和赋值
+	var a = func;//赋值,新的函数变量名跟符合右边的函数是同一个执行序列
+	a = func();
+	console.log(a);
+	var arr =[66,100,73,33];
+	arr.sort();
+
+	//定义一个排序函数
+	function sortFuunc(a,b){
+		return a-b;
+	}
+	arr.sort(sortFuunc());
+	console.log(arr);
+	//函数变量作为数组的元素
+	var arr2=[func];
+	arr2[0]();
+
+	var func3 = new Function('a',console.log("func3被调用了"));
+	func3(100); //函数调用
+	</script>  
+
+
+<q></q>
+</body>
+</html>

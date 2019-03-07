@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解析xml</title>
+</head>
+<body>
+<input type="button" id="btn" value="获取xml数据">
+<script>
+    var btn = document.getElementById('btn');
+    btn.onclick=function(){
+        var xhr = new  XMLHttpRequest();
+        xhr.open('get','http://172.17.13.39:8000/xml');
+        console.log(xhr);
+        xhr.send();
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200&&xhr.readyState==4){
+                //拿到服务端数据,responseXML实际上是在responseText上加了样式,
+                //responseXML类型是document,dom的解析方式都可以应用
+                var data=xhr.responseXML;
+                console.log(data)
+                var stars = data.querySelectorAll("star");
+                //数据显示
+                var sumStr='';
+                for(var i =0;i<stars.length;i++){
+                    sumStr += "<ul>";
+                    sumStr+="<li>"+stars[i].querySelector("name").innerHTML+"</li>";
+                    sumStr+="<li>"+stars[i].querySelector("age").innerHTML+"</li>";
+                    sumStr+="<li>"+stars[i].querySelector("work").innerHTML+"</li>";
+                    sumStr += "</ul>";
+                    console.log(sumStr)
+                }
+                document.body.innerHTML = sumStr;
+            }
+        }
+    }
+</script>
+</body>
+</html>

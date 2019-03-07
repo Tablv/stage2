@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组的操作</title>
+</head>
+<body>
+	<script>
+	var arr = [1,22,'hello','test',123];
+	console.log(arr);
+	console.log(arr.toString());
+	console.log(arr.join(" "));
+	console.log(arr.concat("world"));
+	console.log(arr.concat("world",123));
+	console.log(arr.slice(0,2));
+	console.log(arr.slice(2));
+	console.log(arr.slice(-3,-1));
+	// arr.slice(arr.length-3,arr.length-1);  同上
+	// console.log(console.log(123));
+	console.log(arr); 
+	//concat slice join toString 对数组本身不进行任何改变
+	arr.splice(2); // 从索引2 开始删除，直到最后
+	console.log(arr);
+	//splice 对数组本身进行改变
+	arr = [1,22,'hello','test',123]; //从新赋值
+	//删除
+	arr.splice(2,2); //第二个参数是删除的个数
+	console.log(arr);
+	//插入
+	arr = [1,22,'hello','test',123]; //从新赋值
+	arr.splice(2,0,99,100);//从第三个参数及其后的参数，都表示新插入的值
+	console.log(arr);
+	//替换  删除的个数=插入的个数,就达到了删除的功能
+	arr.splice(2,2,101,102);  //将'hello','test' 删除后，又插入两个元素
+	console.log(arr);
+
+	//颠倒函数的顺序
+	arr.reverse();
+	console.log(arr);
+
+	var num_arr = [1,5,30,723,90,5,4];
+	num_arr.sort();
+	console.log(num_arr); 
+	</script>
+</body>
+</html>

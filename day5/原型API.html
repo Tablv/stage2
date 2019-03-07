@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原型API</title>
+</head>
+<body>
+	<script>
+	var a=100;
+	console.log(a.constructor);
+	console.log(typeof(a)); //number
+	console.log(typeof(typeof(a))); //string
+	console.log(Object.toString);
+
+	function T(){
+		this.go = 'go';
+	}
+	var t1 = new T();
+	console.log([].constructor.toString());
+
+	//看一个变量是否是Array类型
+	console.log(Array.prototype.isPrototypeOf([])); //TRUE
+	var a = new Number();
+	// console.
+	a = a+100;
+	console.log(a instanceof Number); 
+	// console.log(a.__proto__);
+	// console.log(Number.prototype);
+
+	function f3(){
+		console.log(arguments.constructor);
+	}
+	f3();
+	</script>
+</body>
+</html>

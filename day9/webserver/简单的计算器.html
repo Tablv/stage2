@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单计算器</title>
+	<style>
+	#btn{
+		width:320px;
+	}
+	#btn button{
+		width:50px;
+		height:50px;
+		font-size:18px;
+		margin:5px;
+	}
+	#sc{
+		font-size:20px;
+		width:300px;
+		height:60px;
+		resize:none;
+	}
+
+	</style>
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script>
+	$(function(){
+		//按c清0
+		//疯狂点击0,只能有一个0
+		//定义参数
+		//result:输出内容
+		//定义添加内容
+		var result = '';
+		//绑定响应事件
+		$('#btn').bind('click',function(event){
+			var ele = event.target;
+			//定义获取到的内容,用作判断
+			var tet = $(ele).text();
+			// console.log(tet.length);
+			if(tet.length == 1){
+				switch(tet){
+					case '=':
+						try{
+							result = eval(result);
+						}catch(e){
+							result = 0;
+						}
+						$('#sc').text(result);
+						result = '';
+					break;
+					case '+':
+					case '-':
+						if(tet =="+" || tet == "-"){
+							if(result.length !=0 && result[result.length-1] != tet){
+								result += tet;
+								$('#sc').text(result);
+							}
+						}	
+					break;
+					case 'C':
+						if(tet == 'C'){
+						$('#sc').text('0');
+						result = "";
+						}
+					break;
+					case '0':
+						if(result.indexOf('0')==0){
+						$('#sc').text('0');
+						result = '';
+						}
+						break;
+					default:
+					result+=tet;
+					$('#sc').text(result);
+					break;
+
+
+				}
+				
+			}
+		});
+	})
+	</script>
+</head>
+<body>
+	<textarea id="sc"></textarea>
+	<div id="btn">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+		<button>4</button>
+		<button>5</button>
+		<button>6</button>
+		<button>7</button>
+		<button>8</button>
+		<button>9</button>
+		<button>0</button>
+		<button>C</button>
+		<button>+</button>
+		<button>-</button>
+		<button>=</button>
+	</div>
+</body>
+</html>

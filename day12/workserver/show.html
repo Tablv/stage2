@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交成功页面</title>
+</head>
+<body>
+<h2>提交成功</h2>
+<input type='button' id='btn' value='展示购物车'>
+<div id="show"></div>
+<script>
+    //获取按钮信息
+    var btn=document.getElementById('btn');
+    //绑定单击事件
+    btn.onclick=function(){
+        console.log('展示购物车信息,需要再与服务端进行一次通信')
+        //搭建ajax进行通信
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','http://172.17.13.52:8000/show_arr.info');
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if(xhr.status==200&&xhr.readyState==4){
+                console.log('通讯发送成功');
+                //将响应过来的数据进行切分成数据
+                var arr = xhr.responseText.split(',,');
+                //对传过来的json数组进行遍历,逐个转成本地对象,进行html格式拼接
+                var data = '';
+                for(var i=0;i<arr.length-1;i++){
+                    var jdata = JSON.parse(arr[i]);
+                    console.log(jdata)
+                    data += '<table><tr><td>';
+                    data += jdata.pimg;
+                    data += '</td><td colspan=2></td></tr><tr><td>商品名称:</td><td>';
+                    data += jdata.pname;
+                    data +=  '</td></tr><tr><td>商品数量</td><td>';
+                    data += jdata.pcount;
+                    data += '</td></tr><tr><td>商品单价$</td><td>';
+                    data += jdata.price;
+                    data += '</td></tr><tr><td>商品总价</td><td>';
+                    data += Number(jdata.price)*Number(jdata.pcount);
+                    console.log(Number(jdata.price),Number(jdata.pcount));
+                    data += '</td></tr></table>'
+                }
+                document.querySelector('#show').innerHTML = data;
+                //console.log(xhr);
+                //var jdata = JSON.parse(xhr.responseText);
+                //console.log(jdata.commodity[0].pname)
+            }
+        }
+    }
+</script>
+</body>
+</html>

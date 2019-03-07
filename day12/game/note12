@@ -1,0 +1,77 @@
+同源策略和跨域
+在一个网页的js内部用http请求访问另一个网页,会受同源策略的限制
+1.同源策略是浏览器的一种安全机制,所谓同源是指协议,域名,端口完全一样
+1.1同源的情况
+    同域名   域名相同  http://www.baidu.com/a.js   http://www.baidu.com/b.js
+    同域名不同目录      域名相同,目录不同  http://www.baidu.com/dir/a.js   http://www.baidu.com/b.js
+1.2不同源情况
+    不同域名    http://www.baidu.com    http://www.jingd.com
+    不同ip与端口 http://12.21.21.2:90    http://12.21.21.2:80
+    不同协议    ftp://....  http://...  https://...
+
+
+2.在js中,绕过同源策略安全机制的方法,就叫跨域
+跨域解决方案:
+    jsonp/cors
+2.1 cors
+    --corss dirgin  resource sharing(跨域资源共享)
+    cors是在服务端进行设置,允许所有不同源的http请求
+    在服务端返回http响应之前,加上
+    resp['Access-Control-Allow-Origin'] = '*' 配置
+
+2.2 jsonp
+*注意:jsonp跨域只能应用于get请求,post方法无法绕过
+    jsonp是json的一种使用模式,也是一种非官方的解决方案,
+    其原理是浏览器的一些标签本身就支持跨域,比如iframe,script,img等
+
+
+JQ中的ajax
+get方法
+    $.get(url,data,callback,content-type)
+post方法
+    $.get(url,data,callback,content-type)
+ajax方法
+    $.ajax()
+    相较于前面的方法,拥有更为自由的定制型
+    $.ajax()参数只有一个,是一个object类型,其定义:
+    url ---请求地址
+    type ---http请求方法类型,默认get
+    async   ---是否异步,默认是true,表示是true
+    同步和异步:
+    异步可以在调用之后,紧接着做别的事情,等响应回来后的时候,再触发回调函数,同步一般是请求发送后一直等待响应,响应后来之前,程序处于等待状态
+
+    data    ---请求携带的数据
+    dataType    ---发送数据数据类型
+    success     ---请求成功后的回调函数
+    error       ---请求失败后的回调函数
+    beforeSend  ---请求发送之前调用的匿名函数,如果函数return false,则不发送请求
+
+$.ajax()函数可以实现jsonp
+
+            $.ajax({
+                url:'http://172.17.13.52:8000/get_data',
+                type:'get',
+                dataType:'text/html',
+                data:null,
+                success:function(data){
+                    alert("请求成功"+data);
+                },
+                error:function(){
+                    alert("请求失败")
+                },
+                beforeSend:function(){
+                    return true;
+                }
+
+            })
+        })
+
+2.3 jsonp和cors的对比
+1)jsonp只能实现get请求,而cors支持所有类型的http请求
+2)使用cors可以使用普通xhr发起请求,比jsonp有更好的错误处理
+3)jsonp主要是老版本的浏览器支持,所有的现在浏览器,都支持cors
+
+
+
+作业:
+商品列表展示,选中商品之后提交订单,订单生成后,展示订单信息

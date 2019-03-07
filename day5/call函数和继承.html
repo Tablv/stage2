@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>call函数和继承</title>
+</head>
+<body>
+	<script>
+
+	function f1(){
+		function sortFun(a,b){
+			return a-b;
+		}
+		//sort本身可以修改数组元素之间的位置关系,call方法就把这种对this修改实现成为对arguments的修改
+		Array.prototype.sort.call(arguments,sortFun);
+		console.log(arguments);
+	}
+	f1(9,4,8,6,3,7,9,1,2,1);
+
+
+	//用call的方式来实现继承(非原型链)
+	//定义父类
+	function Father(fname){
+		this.fname = fname;
+		this.say = function(){
+			console.log("我的名字是"+this.fname);
+		}
+	}
+
+	//定义子类
+	function Child(cname){
+		Father.call(this,cname);//实现继承
+
+	}
+
+	var c = new Child('jim');
+	c.say();
+	//解释
+	//new Child('jim') 创建了一个 子类空对象 c ,
+	//Father中的父类对象被子类空对象c替换
+	//执行了,往子类空对象c中添加了fname属性与say函数
+
+	
+
+	function F1(){
+		this.p1 =100;
+	}
+	var obj = {};//往这个obj添加一个属性
+	F1.call(obj);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonp的原生实现</title>
+</head>
+<body>
+    <button id="btn">jsonp跨域请求</button>
+    <script>
+        function jsonp(result){
+            var btn = document.getElementById('btn')
+            btn.onclick=function(){
+                console.log('我被调用了');
+                console.log(result);
+            }
+        }
+    </script>
+    <script src="http://172.17.13.53:8000/jsonp?callback=jsonp">
+    </script>
+</body>
+</html>

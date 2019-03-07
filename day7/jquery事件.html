@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery事件</title>
+	<!-- 导入jquery -->
+	<script src="jq/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	<button id='btn1'>点击1</button>
+	<button id='btn2'>点击2</button>
+	<div id="d1">
+		<p>test</p>
+	</div>
+	<script>
+	$(function(){
+		//jquery事件处理函数
+		$('#btn1').click(function(event) {
+			//click函数就是jq的封装
+			alert('jquery的点击事件1')
+		});
+
+		//bind和unbind
+		//事件名与回调函数绑定  bind
+		$('#btn2').bind('click',function(){
+			//事件名和回调函数绑定
+			alert('jquery的点击事件2')
+		});
+		//取消回调函数的绑定(取消btn1的绑定函数)
+		$('#btn1').unbind('click');
+		$('#btn1').bind('click',function(){
+			//事件名和回调函数绑定
+			alert('jquery取消绑定后,重新绑定')
+		});
+		//给下级节点绑定函数
+		$('#d1').on('click','p',function(){
+			$(this).css({backgroundColor:'red',
+						fontSize:'30px'});
+		})
+		//给向下级节点解绑
+		$('#d1').off('click');
+		//给下级节点绑定一次函数
+		$('#d1').on('click','p',function(){
+			$(this).css({backgroundColor:'red',
+						fontSize:'100px'});
+		})
+	})
+	</script>
+</body>
+</html>

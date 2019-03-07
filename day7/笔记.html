@@ -1,0 +1,98 @@
+DOM事件
+
+1.什么是事件
+	事件就是用户或者浏览器执行的某种动作,
+	例如click,load都是事件名称,
+	而响应某个事件的函数,就叫这个事件的处理函数
+	事件处理函数,一般都以on开头
+
+2.常见的事件
+2.1 浏览器事件  scroll,load
+2.2 表单事件	blur,focus,input,change
+2.3 键盘事件	keydown,keyup
+2.4 鼠标事件	click mouseup,mousedown,mousemove
+2.5 移动端事件	touchstart,touchmove,touchend
+
+3.定义事件的处理函数
+3.1 直接把事件处理函数定义在标签里
+<button onclick="alert('hello world')"></button>
+
+3.2 在标签里调用事件的处理函数
+<button onclick='fun()'></button> fun是js中定义的函数
+3.3 在节点上绑定处理函数
+<button id="btn"></button>
+js中:
+	找到节点,绑定处理函数
+3.4 先获得目标对象,在js中定义函数,再把目标对象绑定在函数上,
+	一个事件的处理函数,只能绑定一个函数对象,使用专门的api绑定事件的处理对象
+DOM ele.addEventListener(事件名,函数对象)添加事件监听
+IE	ele.attachEvent(事件名,函数对象)
+
+4.事件流
+事件流 -- 从页面接受事件的顺序
+4.1.事件冒泡
+即事件开始时,由目标接受事件,逐级向上传递
+4.2.事件捕获
+即事件由根节点接受,再向内传递,目标元素最后接受事件
+4.3.DOM事件的三个阶段
+	1)由外向内,捕获阶段 -- 在默认情况下,用户不关心捕获过程,所以捕获阶段会被自动忽略
+							如果不想忽略捕获过程,修改addEventListener函数的第三个阶段为true
+	2)目标触发,自动执行目标元素上绑定的事件处理函数
+	3)由内向外,冒泡阶段
+	addEventListener 函数,第三个参数默认为false:忽略捕获阶段,为true:忽略冒泡阶段
+	stopPropagation  函数,可以中断冒泡过程
+
+
+
+5.JQuery中的事件
+ jquery中的事件方法已经在底层把时间监听函数都封装好了.直接调用
+
+5.1 直接调用事件方法,如click
+5.2 bind 和 unbind
+	事件绑定回调函数,与 ,解绑
+
+5.3 on,off 
+	给下级节点绑定函数
+	on(事件名,子节点,处理函数)
+		子节点参数可以加
+5.4 one
+	绑定执行一次后,取消绑定
+
+5.5 ready和onload的区别
+	onload:HTML DOM元素 以及 所有资源加载完成（不掉队）
+	onready：HTML DOM元素加载完成
+	先onready  再onload
+	1.调用时,执行对象不同
+		document.ready 这个加载完成后
+		window.onload  这个才会加载完成
+	2.window表示的是  浏览器加载的所有元素(包括了document,图片,js)
+	  document只是一个文本文件,是浏览器最先加载的对象
+	  document外部引用的资源是浏览器在解析document的时候加载的,
+	  所以其他的资源的加载都是document之后
+
+	  window.onload是在所有资源都加载完之后,调用的
+
+	  eg: 在网速特别卡的时候,图片还没有加载完成,但是框框架架已经出来了
+	3.document.ready就是html和其中的js加载完成之后调用的
+	4.document.ready可以绑定多个监听函数
+	  window.onload只能绑定一个
+
+
+BOM
+1.BOM 是专门操作浏览器的对象,BOM的顶层对象window,
+window对象中的子对象就是浏览器暴露给js的一些数据
+
+子对象: document,页面的文本数据,页面上所有的节点都在document上
+		frames,HTML页面中框架的集合
+		history,用户的浏览记录的历史
+		location,当前浏览器窗口的URL信息
+		navigator,检测浏览器与操作系统的信息
+		screen,屏幕信息
+2.定时器
+	让浏览器按照指定时间间隔反复执行同一任务
+2.1 只执行一次  setTimeout(fn,ms);
+				fn:需要执行的函数  ms:延迟(ms)
+	函数返回一个定时器对象
+2.2 循环执行	setInterval(fn,ms);
+	函数返回一个定时器对象
+	可以与计数器配合使用

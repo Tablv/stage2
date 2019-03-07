@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>采集用户信息</title>
+</head>
+<body>
+
+    <input type="text" id="uname">姓名<br>
+    <input type="button" id="btn" value="采集信息">
+
+
+
+<script>
+    var btn = document.getElementById("btn");
+    var num = 1;
+    //给btn添加事件
+    btn.onclick=function(){
+        var uname = document.getElementById('uname').value;
+        var user = {
+            "uname": uname,
+            "uid": "201902030" + num,
+            "ufen": 300
+        };
+        var user = JSON.stringify(user);
+        num++;
+        var xhr = new XMLHttpRequest();
+        xhr.open('post','http://172.17.13.39:8000/get_user.info');
+        xhr.setRequestHeader('Content-type','application/json');
+        xhr.send(user);
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200&&xhr.readyState==4){
+                if(xhr.responseText != 'false'){
+                    window.location.href="http://172.17.13.39:8000/show_user.html";
+                }
+            console.log('发送成功');
+            //console.log('跳转页面');
+            //window.location.href="http://172.17.13.39:8000/get_user.info";
+            }
+
+        }
+
+    }
+</script>
+</body>
+</html>

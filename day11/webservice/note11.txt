@@ -1,0 +1,36 @@
+1.ajax的post请求
+http的方法有很多种,应用最多的是get和post请求,还有put,delete,head
+在浏览器地址栏中输入url发送的请求是get请求
+post方法携带数据量比get要大很多,因为get方法只能在url里携带数据,而url的长度是受限的
+
+http协议是严格区分http请求方法的,即一个url一般只响应一种http请求方法,其他的忽略
+
+2.xml
+定义:
+xml是一种最通用的数据格式,支持所有的语言,协议和运行平台,它实际上是一个带格式的字符串
+其格式与html非常相似,区别在于xml主要是用来存储数据,html里存在大量的预定义标签,xml没有预定义标签,所有标签都是自定义的
+
+作用:
+xml版本一般使用1.0
+用于存储数据,并且有一定的数据组织格式
+
+
+
+3.json
+定义:json是一种最通用的数据格式,支持所有语言,协议,和运行平台
+json是目前通用数据结构中使用率最高的数据格式
+特点:
+    易于阅读和编写
+    易于解析和生成
+    json目前是网络上使用最广泛的数据格式之一,他已经替代了xml
+json对于js来说,使用的数据类型有Number,String,Boolean,Array,Object,null
+在json中,有两种表示集合数据的格式,数组用[],字典(js中就是对象){}
+客户端与服务端通信的数据格式,往往用json,客户端传递json数据需要用post格式
+
+$.get(url,data,callback,type)
+ 		//jq中ajax发送get请求
+        //url表示地址,
+        //data表示发送数据
+        //callback表示响应回来的处理函数
+        //type表示传输数据类型(content-type)xml,json都可以自动识别
+        

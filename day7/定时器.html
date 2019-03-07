@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器</title>
+</head>
+<body>
+	<script>
+	//setTimeout
+	console.log(setTimeout);
+	var time = setTimeout(function(){
+		alert('定时器执行')
+	},1000);
+	console.log(typeof(time));
+
+	//取消定时器
+	clearTimeout(time);
+
+	var count =1;
+	var time2 = setInterval(function(){
+		console.log('定时器循环执行中...')
+		//清楚循环定时器
+		if(count>=10){
+			clearInterval(time2);
+		}
+		count++;
+	},1000);
+
+	console.log(time2);
+
+	
+	
+	</script>
+</body>
+</html>

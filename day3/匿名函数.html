@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匿名函数</title>
+</head>
+<body>
+	<script>
+	// 1
+	(function(){
+		console.log("()匿名函数被调用");
+	})();//匿名函数的调用
+	//2 创建完成后,立即调用,注意包裹函数的括号
+	~~function(a){
+
+		console.log("参数a:",a);
+
+
+		console.log("~匿名函数的调用")
+	}(100);//匿名函数的调用
+	//3 匿名函数可以赋值给一个函数变量
+	var fun1 = function(){
+		console.log("匿名函数赋值");
+	};
+	fun1();
+
+	//4 函数中定义匿名函数返回
+	function fun2(){
+		return function(){
+			console.log("匿名函数作为返回值");
+		}
+	}
+	console.log(fun2());
+	fun2()();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片切换</title>
+	<style>
+	img{
+		width:400px;
+		height:400px;
+	}
+	</style>
+</head>
+<body>
+	<script>
+	//把图片的路径放在一个数组中
+	var imgArr=['img/乔巴.jpg','img/佛朗基.jpg','img/索隆.jpg'];
+	var img_index = 0;
+
+	function toggle(flag){
+		//每次点击上一张  或者下一张  就是改变img控件src的值，就是改变imgArr
+		//的索引下标
+		if(flag == 'top'){
+			if(img_index == 0){
+				img_index = imgArr.length-1;
+			}else{
+				img_index--;
+			}
+			
+		}else{
+			if(img_index == imgArr.length-1){
+				img_index = 0;
+			}else{
+				img_index++;
+			}
+		}
+		//获取img控件，修改src
+		var eleImg = document.getElementById("img");
+			eleImg.src = imgArr[img_index];
+	}
+	
+	</script>
+	<img src="img/乔巴.jpg" id='img'>
+	<br>
+	<button onclick="toggle('top')">上一张</button>
+	<button onclick="toggle('bottom')">下一张</button>
+</body>
+</html>

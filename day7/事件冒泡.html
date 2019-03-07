@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件冒泡</title>
+	<style>
+	#d1{
+		width: 300px;
+		height:300px;
+		position:relative;
+		z-index:1;
+	}
+	#d2{
+		width:200px;
+		height:200px;
+		top:50%;
+		left:50%;
+		margin:-100px 0 0 -100px;
+		position:absolute;
+		z-index:10;
+	}
+	#d3{
+		width: 100px;
+		height:100px;
+		position:absolute;
+		z-index:20;
+		margin:30px 50px 0;
+	}
+	#d1,#d2,#d3{
+		font-size:20px;
+		border:2px solid #333;
+		text-align:center;
+	}
+	</style>
+</head>
+<body>
+	<div id="d1">d1
+		<div id="d2">d2
+			<div id="d3">
+				d3
+			</div>
+		</div>
+	</div>
+	<script>
+	function fun(event){
+		//事件绑定的处理函数,
+		//第一个参数是浏览器自动添加的关于事件信息参数
+		//获取当前目标元素
+		var ele = event.target;
+		//弹出此元素的id
+		alert(this.id);
+		//当前节点,可以停止event继续传递:不在通知上级节点
+		//函数:取消冒泡
+		event.stopPropagation();
+	}
+	//d1,d2,d3
+	//都绑上fun这个处理函数
+	var divs = document.querySelectorAll('div');
+	console.log(divs);
+	for(var i=0;i<divs.length;i++){
+		divs[i].addEventListener("click",fun,false);
+	}
+	</script>
+</body>
+</html>

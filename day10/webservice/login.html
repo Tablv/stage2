@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    用户名:<input type="text" id="name"><br>
+    密码:<input type="text" id="pwd"><br><br>
+    <button id="btn">确认</button>
+    <h1>发送ajax的get请求</h1>
+    <script>
+        var btn=document.getElementById("btn");
+        btn.onclick = function () {
+            //创建XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            //建立连接,第一个参数是http方法get/post
+            //第二个参数是url,第三个参数是否异步,默认是true表示异步
+            //获取用户名和密码数据,拼接到url上,达到向服务端发送数据的目的
+            var url="http://172.17.13.39:8000/valid";
+            var name=document.getElementById("name").value;
+            var pwd=document.getElementById("pwd").value;
+            url+="?name="+name+"&pwd="+pwd;
+            xhr.open("get",url,true);
+            //发送请求,参数是需要发给服务端的数据,一般post的时候携带数据
+            //设置请求头,一般只设置数据格式Content-type
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send(null);
+            //注册监听
+            //onreadystatechange事件,监听服务端响应状态的改变
+            //readyState属性:0  请求未初始化,
+            //               1  请求建立,还没有发送
+            //               2  请求在处理中,表示响应有部分数据,但是服务端没有完成响应
+            //               3  响应已完成,可以获取并使用服务端响应数据
+            //xhr.responseText 服务端返回的数据(字符串)
+            xhr.onreadystatechange=function () {
+                //对响应状态做判断
+                if(xhr.readyState==4&&xhr.status==200){
+                    console.log("成功接收响应");
+                    document.querySelector("h1").innerHTML=xhr.responseText;
+                }else{
+                    console.log("发生错误");
+                    console.log(xhr.readyState);
+                    document.querySelector("h1").innerHTML=xhr.responseText;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

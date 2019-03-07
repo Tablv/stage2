@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>异常</title>
+</head>
+<body>
+	<script>
+		// SyntaxError  语法错误
+		// ReferenceError  引用错误
+		// TypeError	类型错误
+		// RangeError  范围错误
+		// EvalError	调用eval函数时错误
+		// URLError	Url错误
+
+		// abc;  //引用错误  abc is not defined
+		// int i = 0; //语法错误 Unexpected identifier
+		// 12.splice(1);  //语法错误  Invalid or unexpected token
+		try{
+			try{
+			abc;
+			}catch(e){ //e这个异常一旦被捕获到,只存在于当前的catch语句块中
+			console.log("捕捉到内层错误");
+			console.log(e);
+			// ReferenceError: abc is not defined 
+			// at file:///D:/web1811/%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/day4/%E5%BC%82%E5%B8%B8.html:21:4
+			console.log(e.toString()); //ReferenceError: abc is not defined
+
+			//再写一个错误
+			cba; //会被系统捕捉到
+		}
+		}catch(e){
+			console.log("捕捉到外层错误"); 
+			console.log(e.toString()); //ReferenceError: cba is not defined
+		}
+		
+
+
+
+
+
+
+		// //抛出自定义异常
+		// var age = 300;
+		// //方式一
+		// if(age >= 300){
+		// 	console.log("以前的处理方式,打印提示语句");
+		// 	throw new Error("年龄不符合规定"); //现在的处理的方式,抛出异常,中断程序运行
+		// }
+
+		// var score = 100;
+		// if(score >= 100){
+		// 	console.log("分数不符合规格")
+		// }
+
+
+
+		try{
+			try{
+				lcj;
+			}catch(e){
+				console.log("把捕捉到的异常抛出去")
+				console.log(e); //ReferenceError: lcj is not defined
+				throw e;
+				console.log(e); //空的
+			}
+		}catch(e){
+			console.log(e); //ReferenceError: lcj is not defined
+			console.log("再抛");
+			throw e;
+			console.log(e); //空的
+			console.log(e); //空的
+			
+			
+		}
+	</script> 
+</body>
+</html>

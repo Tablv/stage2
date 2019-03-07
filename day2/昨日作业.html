@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组中的重复数据</title>
+</head>
+<body>
+<script>
+	//自己定义了一个检查函数
+	function isExist(str,re){
+		//判断str是否是re中的已经存在的key
+		for(key in re){
+			if(str==key){
+				return true;
+			}
+		}
+		return false;
+
+	}
+	var arr = ["hello","xms","world","hello","xms","xms",'hello'];
+	var result = [];//存放结果的关联数组
+	for(var i =0;i<arr.length;i++){
+		//当result里面没有当前字符串key的时候，新增一个key，并记录下当前的下标
+		if(!isExist(arr[i],result)){
+			result[arr[i]] = [i];
+		}else{//当result里面有当前字符串key的时候，在key对应的value数组中增加一个下标
+			result[arr[i]].push(i);
+		}
+		
+
+	}
+	for(i in result){
+		console.log(i,result[i]);
+	}
+</script>
+	
+</body>
+</html>

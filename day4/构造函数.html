@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>构造函数</title>
+</head>
+<body>
+	<div>
+		员工编号 <input type="text" id='bm'>
+		姓名 <input type="text" id='xm'>
+		岗位 <input type="text" id="gw">
+		<input type="submit">
+	</div>
+	<div style="color:red;background:#ccc;width:200px;height:500px;">
+	</div>
+	<script>
+	//var 对象名 = new 类型;
+	var a = new Number();
+	console.log(Number());//0
+	var b = Number();
+	console.log(b+100);//100
+	console.log(String());//空
+
+	//定义构造函数,就是对象的类型,即对象的属性模板
+	function Stu(sname,age){
+		this.sname = sname;
+		this.age = age;
+		this.intrSelf = function(){
+			console.log(this,this.sname,this.age);
+		}
+	}
+	//Stu('小明',45).intrSelf(); //Uncaught TypeError: Cannot read property 'intrSelf' of undefined
+	//构造函数不能当做普通函数调用,要用new配合,不然会导致this指向不明
+	new Stu('小明',45).intrSelf(); //Stu {sname: "小明", age: 45} "小明" 45
+
+    // var s1 = new Stu(); //stu 作为构造函数(类型),创建一个对象
+
+    // console.log(this);
+
+    //用构造方法的方式,来录入一组员工信息(员工编号,名字,岗位)
+    
+    //1.定义构造方法 ---提取对象特性
+    //2.创建每个对象 ---new
+    //3.把创建对象发到数组里
+
+    //定义构造方法
+    function Person(bm,xm,gw){
+    	this.bm = bm;
+    	this.xm = xm;
+    	this.gw = gw;
+    	this.toShow = function(){
+    		return '员工编码:'+bm+"姓名:"+xm+"岗位"+gw;
+    	}
+    }
+    //创建结果数组
+    var person_list = [];
+    //创建对象
+    var person1 = new Person('1001','时习','按摩小妹');
+    //把对象放到数组里面
+    person_list.push(person1);
+
+    //遍历数组
+    for(var i=0;i<person_list.length;i++){
+    	console.log(person_list[i]);
+    }
+
+    //点击按钮获取数据
+    var sub = document.querySelector("input[type=submit]");
+    sub.onclick = function(){
+    	var bm = document.getElementById('bm').value;
+    	var xm = document.getElementById('xm').value;
+    	var gw = document.getElementById('gw').value;
+    	var person = new Person(bm,xm,gw);
+    	person_list.push(person);
+    	for(var i=0;i<person_list.length;i++){
+    	console.log(person_list[i]);
+    	}
+    }
+
+
+
+
+
+
+
+
+
+	</script>
+	
+</body>
+</html>

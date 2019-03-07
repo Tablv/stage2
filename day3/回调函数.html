@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>回调函数</title>
+</head>
+<body>
+	<button id="btn">点击</button>
+	<script>
+	//sort函数的使用,就是函数的回调机制
+	function sortFunc(a,b){
+		return a-b;
+	}
+	var arr = [100,55,86,3];
+	arr.sort(sortFunc())
+
+
+
+	// 回调函数的定义和使用
+	// 触发函数(满足特定事件或者条件的调用者)
+	function getCall(callfn,data){
+		console.log("触发函数");
+		callfn(data);
+	}
+	// 回调函数(被调用者)
+	function callBack(data){
+		console.log("回调函数")
+		console.log("数据:",data);
+	}
+	getCall(callBack,100);
+
+
+	//给按钮帮一个回调函数
+	var btn = document.getElementById("btn");
+	//等号右边的匿名函数就是一个回调函数
+	btn.onclick = function(){
+		alert("按钮点击");
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

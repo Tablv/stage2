@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        ul{
+            padding:0;
+            display:inline-block;
+            list-style: none;
+            position:relative;
+        }
+        input[id=num]{
+            width:20px;
+        }
+        img[id=btn]{
+            position:absolute;
+            right:50px;
+            bottom:0;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div>
+        <ul>
+            <li><img src="client/image/commodity/美丽说—白领的全球导购_42.png"></li>
+            <li> 商品名称:<span>苏格兰打卤面</span></li>
+            <li>价格:<span>3000</span></li>
+            <li>加入购物车:<img id="btn" src="client/image/美丽说—白领的全球导购_07.png"></li>
+        </ul>
+         <ul>
+            <li><img src="client/image/commodity/美丽说—白领的全球导购_43.png"></li>
+            <li> 商品名称:<span>苏格兰打卤面</span></li>
+            <li>价格:<span>3000</span></li>
+            <li>加入购物车:<img id="btn" src="client/image/美丽说—白领的全球导购_07.png"></li>
+        </ul>
+        <ul>
+            <li><img src="client/image/commodity/美丽说—白领的全球导购_44.png"></li>
+            <li> 商品名称:<span>苏格兰打卤面</span></li>
+            <li>价格:<span>3000</span></li>
+            <li>加入购物车:<img id="btn" src="client/image/美丽说—白领的全球导购_07.png"></li>
+        </ul>
+        <ul>
+            <li><img src="client/image/commodity/美丽说—白领的全球导购_45.png"></li>
+            <li> 商品名称:<span>苏格兰打卤面</span></li>
+            <li>价格:<span>3000</span></li>
+            <li>加入购物车:<img id="btn" src="client/image/美丽说—白领的全球导购_07.png"></li>
+        </ul>
+    </div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','http://172.17.13.52:8000/json_db.info');
+        xhr.send(null);
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200&&xhr.readyState==4){
+                concosle.log("发送消息成功!")
+                var jdata = JSON.parse(xhr.responseText);
+                var data = '';
+                for(var i=0;i<jdata.db.commodity.length;i++){
+                    data+=''
+                }
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

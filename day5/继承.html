@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承</title>
+</head>
+<body>
+	<script>
+	//类和对象都有其原型对象
+	//并且属于同类型的对象和本对象的原型对象是同一个
+	function Stu(){
+		this.sname = 'lcj';
+		this.__proto__.age = 123;
+	}
+	var s = new Stu();
+	console.log(Stu.prototype);
+	console.log(s.__proto__);
+	console.log(s.constructor);
+	var obj = {};
+	console.log(obj.constructor);
+	var a = 100;
+	console.log(a.constructor);
+	console.log(s.hasOwnProperty("sname")); //true
+	console.log(s.hasOwnProperty("name"));  //false
+	console.log(s.hasOwnProperty("age"));  //false
+	//判断一个属性是否是原型上的属性
+	// 第一个条件:满足hasOwnProperty('属性') 的结果是false
+	// 第二个条件:打印该属性不等于 undefined
+	if(!s.hasOwnProperty("toString") && s.toString != undefined){
+		console.log('原型链上的函数')
+	}
+
+	function XmsStu(){
+		this.stype = 'web';
+	}
+	var xms = new XmsStu();
+	console.log(XmsStu);
+	console.log(xms.stype); //web
+	delete xms.stype;
+	console.log(XmsStu); 
+	console.log(xms.stype);  //undefined
+	console.log(xms); //XmsStu {}
+	//一个对象定义出来后,他的属性可以在外部直接添加,但是不会影响到构造函数
+	xms.courseType = 'web';
+	console.log(XmsStu); 
+	console.log(xms); //XmsStu {courseType: "web"}
+	var xms2 = new XmsStu();
+	console.log(xms2); //XmsStu {stype: "web"}
+	</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数参数</title>
+</head>
+<body>
+	<script>
+	function f1(a){
+		// if(arguments.length<=0){
+		// 	console.log("没有传入参数");
+		// 	return;
+		// }
+		// if(arguments.length>1){
+		// 	console.log("参数传多了,呆逼");
+		// 	return;
+		// }
+		console.log(arguments);
+		for(var i =0;i<arguments.length;i++){
+			console.log(arguments[i])
+		}
+		console.log("函数被调用,参数a="+a); 
+	}
+	f1();  //函数被调用,参数a=undefined 
+	f1(100); //函数被调用,参数a=100
+	f1(100,33,56,'hello'); //函数被调用,参数a=100
+
+
+	// eg:定义一个函数,
+	// 第一个参数用来表示  运算类型
+	// 第二个参数和第三个参数表示两个运算数据
+
+	// function getResult(type,num1,num2){
+	// 	//获取传入的参数
+	// 	//形参和arguments是不冲突的,atguments可以管理所有的参数
+	// 	if(arguments.length<=0){
+	// 		console.log("没有传入参数");
+	// 		return;
+	// 	}
+	// 	if(arguments.length>1){
+	// 		console.log("参数传多了,呆逼");
+	// 		return;
+	// 	}
+	// 	switch(arguments[0]){  //arguments[0] 就是type
+	// 		case "+":
+	// 			return num1 + num2;
+	// 			break; //可以不写
+	// 		case "-":
+	// 			return num1 - num2;
+	// 			break;
+	// 		case '/':
+	// 			//要判断被除数是否为0
+	// 			if(num2 ==0){
+	// 				console.log("被除数不能为0");
+	// 				break;
+	// 			}else{
+	// 				return num1/num2 ;
+	// 			}
+	// 			break;
+	// 		case '*':
+	// 			return num1 * num2;
+	// 			break;
+	// 		default:
+	// 			console.log("type:+ - * /");
+	// 			break;
+	// 	}
+		
+	// }
+
+
+	//eg  求多个数据的总和,平均数,最大值,最小值
+	function getResult(type){
+		//type : sum:总和  avg:平均数 max:最大值  min:最小值
+		var sum = 0;
+		var max = arguments[1];
+		var min = arguments[1];
+			for(var i=1;i<arguments.length;i++){
+				sum += Number(arguments[i]);
+				if(arguments[i] > max){
+					max = arguments[i];  //最大值
+				}
+				if(arguments[i] < min){
+					min = arguments[i];  //最小值
+				}
+			}
+		switch(type){
+			case 'sum':
+			//求总和
+				return sum;
+			case 'avg':
+			//平均数
+				return sum/arguments.length-1;
+			case 'max':
+			//最大值
+				return max;
+			case 'min':
+			//最小值
+				return min;
+			default:
+				console.log("type : sum:总和  avg:平均数 max:最大值  min:最小值")
+				break;
+		} 
+	}
+	console.log(getResult("0",1234,122,6,5,4,8,11,155));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+1.Django的目录结构
+1.1 主目录(和项目名称同名)
+    包括:__init__.py  标识此文件夹是一个python可访问的文件夹
+        settings.py     Django的配置项
+        urls.py     客户端访问的入口(服务端的目录集合)
+        wsgi.py     兼容性的接口文件
+
+1.2 数据库文件(非必须)
+    Django默认使用sqlite
+
+1.3 项目的启动文件
+    manage.py
+
+2. Django的配置文件   settings.py文件
+
+BASE_DIR    主目录
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG   是否允许调试
+    DEBUG = True
+ALLOWED_HOSTS   允许部署的主机
+    * 通配符 代表所有地址
+    ALLOWED_HOSTS = ["*"]
+INSTALLED_APPS 预先安装的组件
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+MIDDLEWARE  中间件  (主要做数据格式的转换)
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+ROOT_URLCONF 根url的配置(webserver.ulrs),url入口
+    ROOT_URLCONF = 'webserver.urls'
+TEMPLATES   模板
+DATABASES   数据库配置
+STATIC_URL 静态文件(资源文件)地址
+
+
+open函数,打开一个文件并读写里面的内容
+对于文件的内容分类大致有两种,一种叫文本文件,一种二进制文件
+open函数的打开方式
+r读 w覆盖写入 a追加写入
+rb  二进制写入
+
+
+3 静态文件
+Django 允许把静态文件集中放在指定文件夹下,这样,可以把所有静态文件的文件名做成对应的目录
+需要在settings文件中,配一个数据,STATICFILES_DIRS

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>object函数</title>
+</head>
+<body>
+	<script>
+	//创建一个object对象
+	var obj1={
+		name:'小明',
+		age:18,
+		intrSelf:function(){
+			console.log('大家好,我叫'+this.name);
+		}
+	}
+
+	var obj2 = Object.create(obj1);
+	obj2.intrSelf();
+
+	//扩展内置的API
+	var arr1 = ["hello","world",123,66,'hello'];
+	console.log(arr1.indexOf('hello')); //0
+	console.log(arr1.indexOf('hello',1)); //4
+	//封装函数,找到数组中,所有匹配的查找项
+	function findAll(arr,tag){
+		var index = 0;
+		var indexs =[];//每次查找到的集合
+		while(true){
+			var i = arr.indexOf(tag,index);
+			if(i == -1){
+				return indexs;
+			}
+			indexs.push(i);
+			index = i+1;
+		}
+		
+	}
+	console.log(findAll(arr1,'hello'));
+
+	Array.prototype.findAll = function(tag){
+		var index = 0;
+		var indexs =[];//每次查找到的集合
+		while(true){
+			var i = this.indexOf(tag,index);
+			if(i == -1){
+				return indexs;
+			}
+			indexs.push(i);
+			index = i+1;
+		}
+		
+	}
+	console.log(arr1.findAll('hello'));
+	console.log(Array.prototype);
+	delete Array.prototype.findAll;
+	console.log(Array.prototype);
+	// console.log(arr1.findAll('hello'));
+	
+
+	//给String类添加一个成员函数replace2,实现替换多个查找项的功能
+	//'hi world' = 'hello world'.replace2('hello','hi')
+	String.prototype.replace2 = function(oldstr,newstr){
+		// var arr = this.split(oldstr);
+		// console.log(arr.join(newstr));
+		var source = this;
+		while(true){
+			//已知oldstr起始下标,和长度
+			var index = source.indexOf(oldstr);
+			if(index == -1){
+				return result;
+			}
+			var len = oldstr.length;
+			//oldstr左边的字符串
+			var leftstr = source.slice(0,index);
+			//oldstr右边的字符串
+			var rightstr = source.slice(index+len);
+			//新字符串
+			var result = leftstr+newstr+rightstr;
+			source = result;
+		}
+		
+
+	}
+	console.log('hello world'.replace2('hello','hi'));
+	</script>
+</body>
+</html>

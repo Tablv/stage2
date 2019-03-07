@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="client/css/css.cs">
+    <style>
+        ul{
+            padding:0;
+            display:inline-block;
+            list-style: none;
+        }
+        input[id=num]{
+            width:20px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div>
+        <ul>
+            <li><img src="client/image/commodity/美丽说—白领的全球导购_42.png"></li>
+            <li> 商品名称:<span>苏格兰打卤面</span></li>
+            <li>价格:<span>3000</span></li>
+            <li>加入购物车:<input type="checkbox"></li>
+            <li>
+                <button id="jian">-</button>
+                <input type="text" id="num" value="1">
+                <button id="jia">+</button>
+            </li>
+        </ul>
+    </div>
+    <input type="button" id="btn" value="加入购物车">
+</div>
+<script>
+    //获得数量
+    var count = document.querySelector('#num').value;
+    //获得数量加减按钮
+    //点击加按钮,数量加一
+    var jia = document.querySelector('#jia');
+    jia.onclick=function(){
+        if(count < 50){
+             count++;
+        }
+        document.getElementById('num').value=count;
+    }
+    //获得jian按钮,数量减一
+    var jian = document.querySelector('#jian');
+    jian.onclick=function(){
+        if(count > 1){
+            count--;
+        }
+        document.getElementById('num').value=count;
+    }
+    //获得提交按钮,提交数据,进行数据交互
+    var btn = document.getElementById('btn');
+    btn.onclick=function(){
+        var pimg = document.querySelector('li:first-child').innerHTML;
+        var pname = document.querySelector('li:nth-child(2) span').innerText;
+        var price = document.querySelector('li:nth-child(3) span').innerText;
+        var psele = document.querySelector('li:nth-child(4) input[type=checkbox]').checked;
+        //组成本地对象
+        var obj = {'pimg':pimg,'pname':pname,'price':price,'psele':psele,'pcount':count};
+        //转成json
+        var jdata = JSON.stringify(obj);
+        //搭建ajax
+        var xhr = new XMLHttpRequest();
+        xhr.open('post','http://172.17.13.52:8000/result.info');
+        xhr.send(jdata);
+        //监听事件
+        xhr.onreadystatechange=function(){
+            if(xhr.status==200&&xhr.readyState==4){
+                console.log('发送成功');
+                if(xhr.responseText=='false'){
+                    alert('请选择加入购物车的商品');
+                }else{
+                   window.location.href='http://172.17.13.52:8000/show.html'
+                }
+                console.log(xhr);
+            }
+        }
+        console.log(psele)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送json给服务端</title>
+</head>
+<body>
+    <button id="btn">发送json给服务端</button>
+    <script>
+        var jdata = {//声明一个object对象
+                "hollywood":[
+                {"star":{"name":"袖克曼","age":48,"work":"金刚狼"}},
+                {"star":{"name":"小罗伯特唐尼","age":45,"work":"钢铁侠"}},
+                {"star":{"name":"埃文斯","age":40,"work":"美国队长"}}
+                        ]
+        }
+        var jdata = JSON.stringify(jdata);//把js对象转成json格式的字符串
+        var btn = document.getElementById('btn');
+        btn.onclick=function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('post','http://172.17.13.39:8000/accept_json');
+            //设计请求头
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(jdata);
+            //监听事件
+             xhr.onreadystatechange=function (){
+                  if(xhr.status==200&&xhr.readyState==4){
+                alert("发送json成功");
+                }else{
+                    console.log('状态变化过程中...')
+                }
+             }
+
+        }
+    </script>
+</body>
+</html>

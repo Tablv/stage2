@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>炸金花</title>
+	<style>
+	*{margin:0 auto;padding:0;}
+	.left{
+		float:left;
+	}
+	.right{
+		float:right;
+		width:600px;
+	}
+	.show{
+		width:600px;
+		background:#457C11;
+	}
+	.show:after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	</style>
+</head>
+<body>
+	<div class="show">
+	
+	</div>
+	<script>
+	//定义一张牌
+	function Card(point,colour){
+		//point 点数 定义为number 因为点数是用来比较的
+		//colour 花色 定义为number
+		this.point = point;
+		this.colour = colour;
+		this.say = function(){
+			var points ='2345678910JQKA';
+			var colours = ['diamond','club','heart','spade'];
+			console.log(colours[this.colour],points[this.point-2]);
+		}
+	}
+
+	var temp = '<div class="right"><div class="left">玩家一</div>'
+	var card = '<img src="poker/club02.jpg" class="left">'
+	var cardType = '<div class="left">牌型是:豹子</div></div><br>';
+	var result = '';
+	for(var i=0;i<5;i++){
+		result=result + temp+card+cardType;
+	}
+	console.log(result);
+	var show_obj = document.querySelector('.show');
+	console.log(show_obj);
+	show_obj.innerHTML = result;
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq中jsonp的实现</title>
+    <script src="jquery-1.4.js"></script>
+</head>
+<body>
+    <button id="btn">jq_jsonp请求发送</button>
+    <script>
+        $("#btn").click(function(){
+            $.ajax({
+                url:'http://172.17.13.52:8000/jq_jsonp',
+                type:'get',
+                dataType:'jsonp',
+                data:null,
+                jsonpCallback:'jsonpFun',
+                success:function(data){
+                    alert("jq_jsonp请求成功"+data);
+                }
+            })
+        })
+    </script>
+</body>
+</html>

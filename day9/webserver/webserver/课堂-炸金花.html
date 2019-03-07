@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>炸金花</title>
+</head>
+<body>
+	<script>
+	//定义一张牌
+	function Card(point,colour){
+		//point 点数 定义为number 因为点数是用来比较的
+		//colour 花色 定义为number
+		this.point = point;
+		this.colour = colour;
+		this.show = function(){
+			//全部点数,命名0+点数
+			var points ='02030405060708091011121314';
+			//花色 方片 梅花 红心 黑桃
+			var colours = ['diamond','club','heart','spade'];
+
+			var tmpStr = colours[this.colour]+points.substr((this.point-2)*2,2);
+			console.log(tmpStr);
+
+			return "<img src='poker/"+tmpStr+".jpg'/>";
+			
+		}
+	}
+	
+	//对三张牌这样的实体进行抽象
+	function HandCards(c1,c2,c3){
+		//牌型判断,点数排序
+		//对c1,c2,c3排序
+		var cardlist = [c1,c2,c3];
+		cardlist.sort(function(a,b){
+			return b.point - a.point;
+		});
+		console.log(cardlist);
+		this.cardlist = cardlist;
+		//确定牌型
+		//豹子(三张牌点数一样)
+		this.level=0;//默认牌型是普通牌
+		if(this.cardlist[0].point == this.cardlist[2].point){
+			//点数最大和最小的牌点数一样,就是豹子
+			this.level = 5;
+		}else
+		if(this.cardlist[0].point-this.cardlist[1].point==1&&this.cardlist[1].point-this.cardlist[2].point==1){
+			if(this.cardlist[0].colour==this.cardlist[1].colour && this.cardlist[0].colour==this.cardlist[2].colour){
+				//顺金
+				this.level = 4;
+			}else{
+				//顺子
+				this.level = 2;
+			}
+		}else
+		if(this.cardlist[0].colour==this.cardlist[1].colour && this.cardlist[0].colour==this.cardlist[2].colour){
+			this.level = 3;
+		}else
+		if(this.cardlist[0].point == this.cardlist[1].point||this.cardlist[1].point == this.cardlist[2].point){
+			this.level = 1;
+		}
+		//打印三张牌
+		this.show = function(){
+			var result = '';
+			for(var i = 0;i<3;i++){
+				result += this.cardlist[i].show();
+			}
+			var levels =['普通牌','对子','顺子','金花','顺金','豹子'];
+			result += ('牌型是:'+levels[this.level]+"<br>");
+			// var node = document.querySelector('body');
+		 //    node.innerHTML = result;
+		 	return result;
+		}
+		console.log(this.level);
+	}
+	
+	function getDouble(h){
+		var singleP =0;
+		var doubleP = 0;
+		var has =false;
+		if(h.cardlist[0].point == h.cardlist[1].point){
+			singleP = h.cardlist[2].point;
+			doubleP = h.cardlist[0].point;
+			if(h.cardlist[0].colour == 3||h.cardlist[1].colour == 3){
+				has = true;
+			}
+		}else{
+			singleP = h.cardlist[0].point;
+			doubleP = h.cardlist[2].point;
+			if(h.cardlist[1].colour == 3||h.cardlist[2].colour == 3){
+				has = true;
+			}
+		}
+
+		return [singleP,doubleP,has];
+		//return [单张点数,对子点数,对子是否有黑桃]
+	}
+
+	function compareCards(h1,h2){
+		//牌型不同的时候
+		if(h1.level > h2.level){
+			return h1;
+			console.log(h1,"h1获胜");
+		}else
+		if(h2.level > h1.level){
+			return h2;
+			console.log(h2,"h1获胜");
+		}else{
+			//牌型相同
+			//豹子,比第一张牌的点数
+			if(h1.level==5){
+				if(h1.cardlist[0].point>h2.cardlist[0].point){
+					return h1;
+				}else{
+					return h2;
+				}
+			}
+			//顺金,比第一张牌的点数与花色
+			//顺子,比第一张牌的点数与花色
+			if(h1.level==4||h1.level==2){
+				if(h1.cardlist[0].point>h2.cardlist[0].point){
+					return h1;
+				}else if (h1.cardlist[0].point<h2.cardlist[0].point){
+					return h2;
+				}else{
+					//点数相同,比较花色
+					if(h1.cardlist[0].colour>h2.cardlist[0].colour){
+						return h1;
+					}else{
+						return h2
+					}
+				}
+			}
+			//金花,比较三张牌的点数大小,在比较花色
+			////普通牌,三张牌依次比较
+			if(h1.level ==3||h1.level==0){
+				for(var i=0;i<3;i++){
+				if(h1.cardlist[i].point>h2.cardlist[i].point){
+					return h1;
+				}
+				if (h1.cardlist[i].point<h2.cardlist[i].point){
+					return h2;
+				}
+				}
+				//三张牌点数一样,比较第一场花色
+				if(h1.cardlist[0].colour>h2.cardlist[0].colour){
+					return h1;
+				}else{
+					return h2
+				}
+			}
+			
+			//对子,先比对子牌的点数,再比单牌点数,谁拿到对子牌的黑桃牌,谁就获胜
+			if(h1.level==1){
+				//找到单张和对子牌
+				var re1 = getDouble(h1);
+				var re2 = getDouble(h2);
+				if(re1[1]>re2[1]){
+					return h1;
+				}else
+				if(re1[1]<re2[1]){
+					return h2;
+				}else{
+					if(re1[0]>re2[0]){
+						return h1;
+					}else if(re1[0]<re2[0]){
+						return h2;
+					}else{
+						if(re1[2]){
+							return h1;
+						}else{
+							return h2;
+						}
+					}
+				}
+			}
+			
+			
+		}
+		//return 获胜者
+	}
+
+
+	// var h1 = new HandCards(new Card(8,1),new Card(8,2),new Card(5,3));
+	// var h2 = new HandCards(new Card(8,1),new Card(8,2),new Card(14,3));
+	// compareCards(h1,h2).show();
+	//初始化一副牌
+	function createCards(){
+		var cards = [];
+		for(var i=0;i<4;i++){
+			for(var j=2;j<15;j++){
+				cards.push(new Card(j,i));
+			}
+		}
+		return cards;
+	}
+	//玩家类
+	function Player(pname){
+		this.pname = pname;
+	}
+	//游戏类Game
+	
+	function Game(players){
+		this.players = players;//玩家的个数
+		//初始化一副牌(52张)
+		this.cards = createCards();
+		var result ='';
+		// var sumStr="";
+		//所有随机的三张牌给玩家
+		var ranCards = [];
+		for(var i=0;i<3*this.players.length;i++){
+			var rande = Math.round(Math.random()*(51-i));
+			// sumStr+=this.cards[rande].show();
+			ranCards.push(this.cards[rande]);
+			this.cards.splice(rande,1);
+		}
+		//每三张牌给一个玩家
+		for(var i=0;i<this.players.length;i++){
+			var h = new HandCards(ranCards[i*3],ranCards[i*3+1],ranCards[i*3+2]);
+			this.players[i].hcards = h;
+			result=result+'玩家:'+this.players[i].pname+this.players[i].hcards.show();
+		}
+		//3.比较每个玩家的大小
+		for(var i=1;i<this.players.length;i++){
+			var temp = compareCards(this.players[0].hcards,this.players[i].hcards);
+			if(temp != this.players[0].hcards){
+				this.players[0]=this.players[i] ;
+			}
+			console.log(this.players[0]);
+		}
+		result = result + "<br>赢家是:"+this.players[0].pname+this.players[0].hcards.show();
+		// console.log(rehcard.show());
+		
+		//显示玩家的牌
+		// console.log(players[0].pname);
+		// this.players[0].hcards.show();
+		// console.log(players[1].pname);
+		// this.players[1].hcards.show();
+		var node = document.querySelector('body');
+		node.innerHTML = result;
+	}
+
+		var g1 = new Game([new Player('小明'),new Player('时习1'),new Player('时习2'),new Player('时习3')]);
+		// console.log(g1.cards[0].show());
+
+		//
+	</script>
+</body>
+</html>

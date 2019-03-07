@@ -1,0 +1,119 @@
+1.继承    -- 原型api
+		js为了实现继承,设计了一套原型api,包括原型链,原型对象等
+
+1.1 constructor  --- 返回一个对象的构造函数(类型)
+
+1.2 hasOwnProperty --- 判断是否是自身的属性,不包含原型
+					   返回true是自身属性,返回false表示属性在原型链上或者没有该属性
+1.3 delete  ---删除属性(只能删自身的属性,无法删除原型链上的属性)
+	
+	问题: 因为原型链上的属性是通过__proto__继承过来的父类属性,只拥有使用的权限,
+		  那自身__proto__上的属性,能不能删除呢
+
+
+1.4 typeof 返回变量的类型,返回值类型是  String
+			typeof 只能识别js的原始类型(内置类型),
+				   不能识别自定义类型
+				   			构造函数:会无脑返回function
+				   			对象:会无脑返回object
+
+1.5 isPrototypeOf  --- 判断指定对象是否是子对象的父对象
+			isPrototypeOf的前后必须是对象,不能直接用类型
+			父对象.isPrototypeOf(子对象);
+
+			用法:判断一个对象是否属于一个类型
+			类型.prototype 类型的父对象
+			指定对象是否是子对象的父对象
+			类型.prototype.isPrototypeOf(子对象);  返回值:true
+			
+
+1.6 instanceof  ---判断一个对象是否是一个类型的实例化
+
+
+
+
+
+2.多态
+ 	    同一个对象,在不同情况下,呈现不同的状态
+
+2.1 重载
+		同一个方法传入参数不同,执行不同操作(不适用js)
+2.2 重写
+		子对象成员和父对象有同名的属性和方法,那么会覆盖父对象的成员
+
+
+	问题:当父对象的成员被覆盖后,怎么再去调用呢?
+
+3.call/apply函数的用法
+	定义:每个函数对象自带的方法,作用是改变this的指向,
+		 让this指向call参数列表中的第一个参数,
+		 即在代码运行中,修改了this的值,打破了this的原有指向队则
+
+	用法:
+		一般用子类对象来call父类的方法.
+
+	apply和call 的区别:
+		apply只有两个参数,是把除替换this参数之外的参数都放在数组里
+		通过对象调用的函数,那么这个函数就是这个对象的成员函数,
+		如果这个函数需要这个操作这个对象,函数内部就用this表示	
+
+	*用call方法实现继承
+		用 子类的对象 把 父类的this 替换掉,表面上是继承,实际上是在往子类对象添加属性或函数
+		
+
+		//用call的方式来实现继承(非原型链)
+		//定义父类
+		function Father(fname){
+			this.fname = fname;
+			this.say = function(){
+				console.log("我的名字是"+this.fname);
+			}
+		}
+		//定义子类
+		function Child(cname){
+			Father.call(this,cname);//实现继承
+
+		}
+		var c = new Child('jim');
+		c.say();
+		//解释
+		//new Child('jim') 创建了一个 子类空对象 c ,
+		//Father中的父类对象被子类空对象c替换
+		//执行了,往子类空对象c中添加了fname属性与say函数
+
+		function F1(){
+			this.p1 =100;
+		}
+		var obj = {};//往这个obj添加一个属性
+		F1.call(obj);
+4.bind() 函数
+	bind方法也是绑定this,他是永久绑定this,
+	会返回一个新的函数,可提前绑定部分参数
+
+	function Boo(x,y){
+		console.log(x,y);
+		console.log(this);
+		this.name  = x;
+		this.age = y;
+	};
+	var xh = {
+
+	};
+	//绑定xh对象,得到一个新的函数
+	var newBoo = Boo.bind(xh);
+	//上面得到一个函数对象
+	//需要单独在执行,参数也可以在这里传递
+	newBoo(33,44);
+
+	//也可以实例对象
+	var child = new newBoo(22,33);
+
+	console.log(child); //{name:22,age:33}
+
+5.Object的函数
+5.1 create 已一个已经定义好的object对象为模板,创建一个新的object对象
+
+5.2 扩展内置对象的API
+
+	类型.prototype.属性 = 值;
+

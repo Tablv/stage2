@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq中的ajax</title>
+    <script src="jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+    <button id="btn">发送jq的ajax请求</button>
+    <script>
+        //jq中ajax发送get请求,u
+        //url表示地址,
+        // data表示发送数据
+        //callback表示响应回来的处理函数
+        //type表示传输数据类型(content-type),可以默认不写,xml,json都可以自动识别
+        //$.get(url,data,callback,type)
+        $('#btn').click(function(){
+            $.get('http://172.17.13.53:8000/game','null',function(data){
+                alert("jq发送ajax成功");
+                document.body.innnerHTML=data;
+            })
+        })
+    </script>
+</body>
+</html>

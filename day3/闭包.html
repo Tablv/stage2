@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+<body>
+	<script>
+
+	//定义闭包
+	
+	function outer(){
+		var n =1 ;//受保护的局部变量
+		function inner(){
+			//操作局部变量的内层函数
+			return n++;
+		}
+		return inner; //因为内部函数inner使用n这个变量,所以在outer函数调用结束的时候,n变量的声明周期并没有结束
+	}
+	var opr = outer(); //n在outer()中声明出来
+	//outer()只调用了一次,n就声明了一次,初始化了一次,所以n就一份
+	console.log(opr()); //1
+	console.log(opr()); //2
+	// 此时的n只有一份
+	var opr2 = outer(); //再声明了一个n
+	//此时n就有两份,上面一份跟下面一份是两个不同的n
+	console.log(opr()); //3
+	console.log(opr2()); //1
+
+
+
+	//eg:定义一个名字数组,统计姓王和姓李的同学的个数
+	var nameArr = ['王小明','李寻欢','王大锤','张三','李四'];
+
+	function test(fname){//变量:需要统计的姓式
+		var n = 0;//受保护的统计变量n(个数)
+		function inner(fullname){
+			//操作局部变量的内层函数
+			if(fullname[0] == fname){
+				 n++;
+			}
+			return n;
+		}
+		return inner;
+	}
+
+	//王姓个数统计
+	var count = test('王');
+	var c =0;
+	for(var i in nameArr){
+		 c = count(nameArr[i]); //调用的闭包内层函数
+	}
+	console.log(c);
+
+
+	var count1 = test('李');
+	var c1 =0;
+	for(var i in nameArr){
+		 c1 = count1(nameArr[i]); //调用的闭包内层函数
+	}
+	console.log(c1);
+
+
+
+	</script>
+</body>
+</html>

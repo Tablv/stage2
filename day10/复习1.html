@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function f1(){
+			console.log("复习");
+		}
+		f1();
+		this.f1();
+		window.f1();
+		var a=100;
+		console.log(this.a);
+		//在script块中定义的所有变量和函数,都属于window对象
+		var arr=[12,66,100,98];
+		console.log(arr.slice(1,3));//不改变数组本身,结果放在返回值里
+		console.log(arr);
+		arr.splice(0,2);//改变数组本身
+		console.log(arr);
+
+		//值类型和引用类型
+		var a=100;
+		var b=a;//值类型赋值
+		console.log(a,b);
+		b=99;
+		console.log(a,b);
+		var arr=[1,2];
+		var arr2=arr;//引用类型赋值
+		console.log(arr,arr2);
+		arr2.push(100);
+		console.log(arr,arr2);
+		//定义一个arr3,拷贝arr的数据到arr3
+		var arr3=[];
+		//arr和arr3不共用同一片内存地址
+		for(var i=0;i<arr.length;i++){
+			arr3.push(arr[i]);
+		}
+		console.log(arr,arr3);
+		arr3.push("newdata");
+		console.log(arr,arr3);
+		//写一个函数用于交换数组中两个变量的位置
+		//[1,2] --> [2,1]
+		function swap(arr){//把结果放到返回值中
+			var arr2=[];
+			arr2.push(arr[1]);
+			arr2.push(arr[0]);
+			return arr2;
+		}
+		console.log(swap([1,2]));
+
+		function swap2(arr){//改变数组本身
+			var tmp=arr[0];
+			arr[0]=arr[1];
+			arr[1]=tmp;
+		}
+		var arr=[1,2];
+		swap2(arr);//引用类型传递
+		console.log(arr);
+	</script>
+</body>
+</html>

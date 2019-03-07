@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq的ajax函数</title>
+    <script src="jquery-1.4.js"></script>
+</head>
+<body>
+    <button id="btn">$ajax发送请求</button>
+    <script>
+        $("#btn").click(function(){
+            $.ajax({
+                url:'http://172.17.13.52:8000/get_data',
+                type:'get',
+                dataType:'text/html',
+                data:null,
+                success:function(data){
+                    alert("请求成功"+data);
+                },
+                error:function(){
+                    alert("请求失败")
+                },
+                beforeSend:function(){
+                    return true;
+                }
+
+            })
+        })
+    </script>
+</body>
+</html>

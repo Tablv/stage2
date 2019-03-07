@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习-原型链</title>
+</head>
+<body>
+	<script>
+	//定义三个类型  person student  xmsstu
+	//person  --- pname 和 age
+	//student --- school 和 函数'努力学习'
+	//xmsstu  --- type(web) 和 score
+	//自我介绍内容,我是xx,几年xx岁,来自xx学校,在学码思学习xx,学习情况[很好>90;较好>80;一般>60;什么都没学会<60]
+	
+
+
+	//定义person
+	function Person(pname,age){
+		this.pname = pname;
+		this.age = age;
+	}
+	//定义Student
+	function Student(school){
+		this.school = school;
+		this.showTime =function(){
+			console.log("努力学习,天天向上");
+		}
+	}
+	//定义Xmsstu
+	function Xmsstu(type,score){
+		this.type = type;
+		this.score = score;
+		//评价
+		if(this.score >= 90){
+			p = '很好';
+		}else if(this.score >=80){
+			p = '较好';
+		}else if(this.score >=60){
+			p = '一般';
+		}else{
+			p = '什么都没学会';
+		}
+		this.toShow = function(){
+			console.log("我是"+this.pname+","+this.age+"岁,来自"+this.school+"学校,在学码思学习"+this.type+",学习情况"+p);
+		}
+	}
+	//创建person对象
+	var person = new Person('A',200);
+	//创建student对象 , 继承person
+	var student = new Student('啦啦啦');
+	student.__proto__ = person;
+	//创建xmsstu对象 , 继承student
+	var xmsstu = new Xmsstu('web','75');
+	xmsstu.__proto__ = student;
+
+	xmsstu.toShow();
+
+	
+
+
+	
+	</script>
+</body>
+</html>

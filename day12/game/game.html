@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏</title>
+</head>
+<body>
+    玩家id:<span id="p1id">1001</span><br>
+    名字:<input type="text" id="p1name">
+    积分:<input type="text" id="p1score">
+    <br>
+    <br>
+    <br>
+    玩家id:<span id="p2id">1811</span><br>
+    名字:<input type="text" id="p2name">
+    积分:<input type="text" id="p2score">
+    <br>
+    <button id="btn">游戏开始</button>
+    <script>
+        var btn = document.getElementById('btn');
+        btn.onclick=function(){
+            //1.采集页面数据
+            var p1id = document.getElementById('p1id').innerHTML;
+            var p1name = document.getElementById('p1name').value;
+            var p1score = document.getElementById('p1score').value;
+            var p2id = document.getElementById('p2id').innerHTML;
+            var p2name = document.getElementById('p2name').value;
+            var p2score = document.getElementById('p2score').value;
+            //2.组成json
+            var obj = {
+                'players':[
+                    {'id':p1id,'name':p1name,'score':p1score},
+                    {'id':p2id,'name':p2name,'score':p2score}
+                ]
+            }
+            var jdata = JSON.stringify(obj);
+            //3.丢给服务端
+            var xhr = new XMLHttpRequest();
+            xhr.open('post','http://172.17.13.52:8000/recv.info');
+            xhr.setRequestHeader('Content-type','appliction/json');
+            xhr.send(jdata);
+            xhr.onreadystatechange=function(){
+                if(xhr.status==200&&xhr.readyState==4){
+                    console.log('数据发生成功');
+                    //将接受过来的字符串转成本地对象
+                    var jdata = JSON.parse(xhr.responseText);
+                    console.log(jdata);
+                    var sumStr=''
+                    //遍历本地对象
+                    for(var i=0;i<jdata.players.length;i++){
+                        console.log(jdata.players[i].hasOwnProperty('cards'));
+                        sumStr += "<table><tr> <td>用户id:</td><td>"+jdata.players[i].id+"</td></tr><tr><td>名字:</td><td>"+jdata.players[i].name+"</td></tr><tr><td>积分:</td><td>"+jdata.players[i].score+"</td></tr></table>";
+                        //判断是否有cards属性
+                        if(jdata.players[i].hasOwnProperty('cards')){
+                            //拼接图片
+                            for(var j = 0;j<jdata.players[i].cards.length;j++){
+                                sumStr += "<img src='static/"+jdata.players[i].cards[j]+"'>";
+                            }
+                        }else{
+                            //提示积分不够,无法发牌
+                            sumStr += "您的积分不够,不给发牌";
+                        }
+                    }
+                    document.body.innerHTML = sumStr;
+
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

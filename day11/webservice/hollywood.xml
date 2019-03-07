@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hollywood>
+    <star>
+        <name>袖克曼</name>
+        <age>50</age>
+        <work>金刚狼</work>
+    </star>
+    <star>
+        <name>小罗伯特唐尼</name>
+        <age>45</age>
+        <work>钢铁侠</work>
+    </star>
+    <star>
+        <name>埃文斯</name>
+        <age>40</age>
+        <work>美国队长</work>
+    </star>
+</hollywood>

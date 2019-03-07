@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承-原型链</title>
+</head>
+<body>
+	<script>
+	//定义Person类(父类)
+	function Person(pname,age){
+		this.pname = pname;
+		this.age = age;
+	}
+	//定义stu构造函数
+	function Stu(scalss,score){
+		this.scalss = scalss;
+		this.score = score;
+		//每个构造函数都有一个内置属性,叫做prototype
+		//Stu.prototype.score = 100;
+		
+	}
+	//每个构造函数都有一个内置属性,叫做prototype
+	var p = new Person('jim',18);
+	//把stu的原型对象指向一个p的对象
+	//p对象的所有属性都被子类stu继承
+	//因为子类在调用属性时,如果子类没有,会去prototype去找
+	Stu.prototype = p; 
+	
+	var s1 = new Stu('web',12);
+	console.log(s1);
+	console.log(s1.age); //18
+
+	var s2 = new Stu('web188',12);
+	s2.__proto__=p; //修改单个对象的父对象
+	console.log(s2);
+	console.log(s2.age); //18
+
+
+	//查看对象的父对象
+	console.log(s1.__proto__);
+	console.log(s2.__proto__);
+	var obj ={};
+	console.log(obj.__proto__);
+	console.log(obj.__proto__.__proto__);
+
+
+
+	function f(){}
+	console.log(f.__proto__.__proto__.__proto__);
+
+	console.log(Stu.prototype);
+	Stu.prototype.test = 123456;
+	console.log(Stu.prototype);
+
+
+
+
+	
+	
+
+
+	
+
+	</script>
+
+</body>
+</html>

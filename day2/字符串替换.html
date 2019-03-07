@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串替换</title>
+</head>
+<body>
+	<script>
+	//替换函数
+	function myReplace(source,oldstr,newstr){
+		//1.查找所有出现的位置
+		//2.split("旧的")
+		//3.jion("新的")
+		var arr = source.split(oldstr);
+		return arr.join(newstr);
+	}
+
+	// console.log(myReplace('123132131','1','2'));
+	// console.log(myReplace('12313hello2131','hello','hi'));
+
+
+	function myReplace2(source,oldstr,newstr){
+		//替换完一个之后,在接着替换
+		while(true){
+			//实现一次替换
+			//1.查找第一次出现的位置
+			var index = source.indexOf(oldstr);
+			//如果index = -1 就跳出循环
+			if(index ==-1){
+				break;
+			}
+			//2.再确定删除字符串的结束位置
+			var endIndex = index+oldstr.length;
+			//3.oldstr的前面的字符串
+			var beforeStr = source.slice(0,index);
+			//4.oldstr的后面的字符串
+			var afterStr = source.slice(endIndex);
+			//5.把新字符串拼接到一块
+			var reStr = beforeStr.concat(newstr,afterStr)
+			console.log(reStr); 
+			//源字符串发生改变
+			source = reStr;
+		}
+	}
+	// myReplace2('hello world,hello','hello','hi');
+
+
+	// function myReplace3(source,oldstr,newstr){
+	// 	var reg = new RegExp(oldstr,"g");
+	// 	return source.replace(reg ,newstr||'')
+	// }
+
+
+
+	//语法分析  有一个英文句子,提出所有的单词
+	//思路  把所有的分割符统筹为 一种分割符
+	//Hello, my name is xiaoming. Nice to meet you.
+	var p = "Hello,my name is xiaoming.Nice to meet you.";
+	// p  = myReplace(p,','," ");
+	// p = myReplace(p,'.'," ");
+	// console.log(p)
+	// console.log(p.split(" "));
+	
+
+	//\W表示非字符,以非字符作为分隔符,直接分隔
+	// console.log(p.split(/\W/));
+
+	
+
+
+
+
+
+
+	</script>
+</body>
+</html>

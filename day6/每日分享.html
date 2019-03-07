@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>每日分享</title>
+</head>
+<body>
+	<script>
+	//定义父类
+	function Animall(aname){
+		this.aname = aname;
+		this.showName = function(){
+			console.log(this.aname);
+		}
+	}
+	//定义子类
+	function Cat(aname){
+		Animall.call(this,aname);
+	}
+	var cat = new Cat("lcj");
+	cat.showName();
+
+	var i = [1,5,3,2,8,6,4,7,9];
+	console.log(i.sort().reverse());
+
+	console.log(Array.prototype)
+	</script>
+</body>
+</html>

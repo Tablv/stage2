@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组的排序</title>
+</head>
+<body>
+	<script>
+	var num_arr = [1,5,30,723,90,5,4];
+	// num_arr.sort(function(a,b){return a-b;});
+	// num_arr.sort(function(a,b){
+	// 	if(a==b){return 0}
+	// 	if(a>b) {return 1}
+	// 	if(a<b) {return -1}
+	// });
+	num_arr.sort(function(a,b){
+		if(a==b){return 0}
+		if(a>b) {return -1}
+		if(a<b) {return 1}
+	});
+	
+	console.log(num_arr); 
+
+	var arr3 = ['王者','青铜','钻石','青铜','王者'];
+
+	arr3.sort();
+	console.log(arr3);
+	arr3.sort(function(a,b){
+		//只要是字符串相等，就表示段位相等
+		if(a==b){
+			return 0;
+		}
+		if(a=="王者"){
+			if(b=='青铜' || b =="钻石"){
+				return 1;
+			}
+		}
+		if(a=="青铜"){
+			if(b =='王者' ||b=="钻石"){
+				return -1;
+			}
+		}
+		if (a =="钻石") {
+			if(b=="王者"){
+				return -1;
+			}
+			if(b=="青铜"){
+				return 1;
+			}
+		}
+	});
+	console.log(arr3);
+	</script>
+</body>
+</html>

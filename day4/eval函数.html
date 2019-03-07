@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>eval函数</title>
+</head>
+<body>
+	<script>
+	console.log("hello world");
+
+	eval('console.log("hello world");');  //执行有正确代码格式的字符串
+
+	function mySplice(arr){
+		//根据arguments的个数\第二个参数的值来,判断是什么操作
+		function inner(num){
+			//获取传入参数的个数
+			var args = arguments.length;
+			//获取传入的所有参数
+			var can=[];
+			for(var i=0;i<args;i++){
+				can.push(arguments[i]);
+			}
+			// console.log(can.join(",")); //1,2,1,2  这他妈的是个字符串
+			// arr.splice(can.join(","));
+			//上eval函数,nb
+			var str = 'arr.splice('+can.join(',')+')'; //拼接要执行的字符串
+			console.log(str); //打印要执行的语句
+			eval(str); //执行splice语句
+			//两个参数
+			if(args <=2 ){
+				// 删除操作
+				console.log("删除操作",arr);
+			}else if(arguments[1] == 0){
+				//插入操作
+				console.log("插入操作",arr);
+			}else if(arguments[1] == args-2){
+				//替换操作
+				console.log("替换操作",arr);
+			}else{
+				console.log("其他操作",arr);
+			}
+			return(arr);
+		}
+		return inner;
+	}
+	</script>
+</body>
+</html>

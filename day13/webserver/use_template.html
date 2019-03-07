@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板的使用</title>
+    <!-- 导入模板-->
+    <script src="js/template-native.js"></script>
+</head>
+<body>
+    <!--定义模板,把数据写到模板,定义模板的script块需要一个id
+        本script实际上是把数据写到模板中,并返回带html样式的数据
+        <% 之后跟的是带关键字的语句,比如for循环
+        <%=  之后跟的是变量(需要处理的数据)
+    -->
+    <script id="tmp1">
+        <% for(var i=0;i<hollywood.length;i++) { %>
+            <ul>
+                <li><%= hollywood[i].star.name %></li>
+                <li><%= hollywood[i].star.age %></li>
+                <li><%= hollywood[i].star.work %></li>
+            </ul>
+        <% } %>
+    </script>
+    <!--
+        一般的script块js
+    -->
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','http://172.17.13.52:8000/re_json.html');
+        xhr.send(null);
+        xhr.onreadystatechange=function(){
+            if(xhr.status=200&&xhr.readyState==4){
+                var obj = JSON.parse(xhr.responseText);
+                 var data = template("tmp1",obj);
+                document.body.innerHTML = data;
+            }
+        }
+        //var jdata = JSON.stringify(obj);
+        //调用模板引擎的template方法,其返回值已经带html格式的字符串数据
+
+    </script>
+</body>
+</html>

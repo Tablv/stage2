@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>call函数</title>
+</head>
+<body>
+	<script>
+	//定义父类
+	function Person(pname,age){
+		this.pname = pname;
+		this.age = age;
+		this.eat = function(food){
+			console.log(this.pname+"再吃"+food);
+		}
+	}
+	var p = new Person('json',20);
+	p.eat('鸡');
+	//
+	// p.eat.call(123);
+	p.eat.call({pname:'jim'},'汉堡');
+	//call函数用第一个参数替代this,后面的参数照常传递
+
+
+	//对于一个类,不知道干什么用
+	//arguments是类数组函数,实现其slice方法
+	//slice方法若要操作数组,肯定会用到this
+	//那么用argumens替换掉原来的this,就可以实现对arguments的slice操作了
+	function f1(){
+		console.log(arguments);
+		//把arguments当做array用
+		var re = Array.prototype.slice.call(arguments,0,2);
+		console.log(re);
+		console.log(re instanceof Array);
+
+	}
+	f1(123,456,789,456);
+	//slice 是 array 这个类的 一个方法
+	console.log([1,2,3,4].slice(1,3));
+
+	//定义一个学生类,实现一个方法,用来更新对象的属性值
+	//sname age  
+	//调用这个方法的时候,用call的方法调用,
+	//用一个object来替换this指向,达到更新的目的
+
+
+	//定义学生类
+	function Student(sname,age){
+		this.sname = sname;
+		this.age = age;
+		this.update=function(arg1,arg2){
+			console.log(this.sname,this.age);
+			this.sname = arg1;
+			this.age = arg2;
+			console.log(this.sname,this.age);
+		}
+	}
+	var stu = new Student('test',123);
+	stu.update('哈哈',456);
+	var obj = {sname:'tom',age:18};
+	//this就是obj,如果函数中修改this的值,实际上修改的是obj,而不是stu
+	//因为obj是引用类型,所有修改this的值,实际上修改的是obj
+	stu.update.call(obj,'lcj',30);
+
+	</script>
+</body>
+</html>

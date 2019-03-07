@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多态</title>
+</head>
+<body>
+	<script>
+	//定义父类
+	function Father(){
+		this.p1 = '父类成员';
+	}
+	//定义子类
+	function Child(){
+		this.p2 = '子类的成员';
+		this.p1 = '子类的成员p1';
+		this.__proto__ = new Father(); 
+	}
+	var c1 = new Child();
+	console.log(c1.p1);
+	console.log(c1.p2);
+
+	console.log(c1.__proto__);
+	
+	</script>
+</body>
+</html>

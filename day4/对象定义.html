@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象定义</title>
+</head>
+<body>
+	<script>
+	//Object --用来定义对象
+	var stu = {
+		sname:"小明",
+		age:22,
+		intrSelf:function(){
+			//this 当前的对象
+			console.log((this.sname+this.age));
+		}
+	}
+	console.log(stu); //Object {sname: "小明", age: 22}
+	console.log(stu.sname); //小明
+	console.log(stu['sname']);
+	console.log(stu.age); //22
+	stu.intrSelf();
+
+
+
+
+
+
+
+
+
+	//new
+	var stu2 = new Object();
+	stu2.sname = '小刚'; //给对象添加属性
+	stu2.age = 15;
+	stu2.intrSelf=function(){
+		console.log((this.sname+this.age));
+	}
+	console.log(stu2); //Object {sname: "小刚", age: 15}
+	console.log(stu2.intrSelf);
+
+
+	//数组
+	var arr = [123];
+	var arr2 = new Array();
+	arr2.push(123);
+	console.log(arr,arr2);
+
+	//数字
+	var num = 100;
+	var num2 = new Number(100);
+	console.log(num ,num2);
+
+
+
+
+
+	//工厂模式:先进性特性提取,再给对象成员进行赋值
+	function createStu(sname,age){
+		//需要特性提取
+		var stu = new Object();
+		stu.sname = sname;
+		stu.age = age;
+		stu.intrSelf = function(){
+			console.log(this.sname+this.age);
+		}
+		return stu;
+	}
+	var stu3 = createStu('小明',22);
+	stu3.intrSelf();
+	var stu3 = createStu('JIM',222);
+	stu3.intrSelf();
+
+	//给一个名字数组,给每一个名字编号
+	//编号从20190101开始+1
+	//最终得到的数据是一组object对象
+	//对象属性有name和no
+	
+	//名字数组
+	var nameArr = ['小明','小刚',"小花",'小刘','老张','A哦','B啊','C呀','D耶','E哈','F呐','J喔','H噢'];
+	//结果数组 是 一堆 object
+	var perArr = [];
+	//定义一个工厂模式创建对象的函数
+	function createPerNo(sname,sno){
+		var per = new Object();
+		per.sname = sname;
+		per.sno = sno;
+		return per;
+	}
+	//给名字编码
+	for(var i = 0;i<nameArr.length;i++){
+		//编码从20190101开始,
+		//创建对象  
+		var newPer = createPerNo(nameArr[i],20190101+i);
+		//添加到数组
+		perArr.push(newPer);
+	}
+
+	//遍历结果数组
+	for(i in perArr){
+		console.log(perArr[i],perArr[i].sno);
+	}
+	</script>
+</body>
+</html>

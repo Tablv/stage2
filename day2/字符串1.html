@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串1</title>
+</head>
+<body>
+	<script>
+	var str1 = "hello world";
+	console.log(str1[0]); //h
+	// console.log(str1.join(','))  //Uncaught TypeError: str1.join is not a function
+	console.log(str1.concat("world"));
+	console.log(str1.slice(0,5));
+	// console.log(str1.splice(5)); //Uncaught TypeError: str1.splice is not a function
+
+	console.log(str1.length);
+	for(i in str1){
+		console.log(str1[i])
+	}
+
+	console.log(str1[0].toUpperCase());
+	//首字符大写
+	console.log(str1[0].toUpperCase()+str1.slice(1))
+
+	console.log(str1.charCodeAt(0));//104  十进制
+
+	console.log("王".charCodeAt(0));// 29579
+	console.log('王'.charCodeAt().toString(16)); //\u738b
+	console.log('\u738b') // 王
+
+
+
+	//给定一个中英文都有的字符串，转成unicode码
+	//unicode 格式 /u 后跟第四位十六进制字符 不足四位补0
+	var num = 100;
+	console.log(num.toString(16)); //转成16进制数  64
+	var str2 = 'hello,我是小明';
+	// 定义结果字符串
+	result = '';
+	for(i in str2){
+		
+		//把字符转成十进制
+		var t_case = str2[i].charCodeAt();
+		//十进制传承十六进制
+		var ts_case = t_case.toString(16);
+		//十六进制是4位直接加/u
+		//十六进制不足四位补0
+		if(ts_case.length < 4){
+			for(var j =0;j<4-ts_case.length;j++){
+				ts_case = "0"+ts_case;
+			}
+		}
+		result = result+'//u' +ts_case;
+	}
+	
+
+
+	console.log(String.fromCharCode("29579"));  //王
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//首字符大写
+	
+	// function firstCase(str){
+	// 	var temp = '';
+	// 	for(var i = 0; i<str.length;i++){
+	// 		if(i==0){
+	// 			temp+=str[i].toUpperCase()			
+	// 		}else{
+	// 			temp += str[i];
+	// 		}
+	// 	}
+	// 	return temp;
+
+	// }
+	// console.log(firstCase());
+
+
+
+	</script>
+</body>
+</html>

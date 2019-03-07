@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>替换字符数组中的a</title>
+</head>
+<body>
+	<script>
+	var arr = ["a",2,4,"a",123,"head","A"];
+	//查找a
+	console.log(arr);
+	for(i in arr){
+		if(arr[i] == "a" ){
+			arr.splice(i,1,"A");
+		}
+	}
+	console.log(arr);
+
+	</script>
+</body>
+</html>

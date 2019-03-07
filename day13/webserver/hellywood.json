@@ -1,0 +1,7 @@
+{
+  "hollywood":[
+    {"star":{"name":"袖克曼","age":48,"work":"金刚狼"}},
+    {"star":{"name":"小罗伯特唐尼","age":45,"work":"钢铁侠"}},
+    {"star":{"name":"埃文斯","age":40,"work":"美国队长"}}
+  ]
+}

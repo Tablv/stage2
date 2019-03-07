@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组声明</title>
+</head>
+<body>
+	<script>
+	//声明一个数组
+	var arr=[1,2,3,4,'hello'];
+	//打印
+	console.log(arr);//[1,2,3,4,'hello']
+
+	//数组的长度
+	console.log(arr.length);  //length:5
+	console.log(arr[arr.length-1]);
+
+	//遍历索引数组中的每个数据
+	for(var i in arr){
+		console.log(arr[i]);
+	}
+	</script>
+
+	<script>
+	var arr =[];
+	arr["025"]="南京";
+	arr["028"]="成都";
+	arr["021"]="上海";
+	console.log(arr); 
+	//[025: "南京", 028: "成都", 021: "上海"]
+	for(i in arr){  //i其实是在遍历key，通过key来遍历value
+		console.log(i,arr[i]);
+	}
+
+	//利用数组实现图片的切换
+	
+	</script>
+</body>
+</html>

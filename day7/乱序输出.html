@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>乱序输出1-10</title>
+</head>
+<body>
+	<script>
+	//乱序输出1-10
+	var result=Math.round(Math.random()*9+1);
+	console.log(result);
+	//定义结果数组
+	var result_list = [];
+	while(true){
+		var result=Math.round(Math.random()*9+1);
+		if(result_list.indexOf(result) == -1){
+			result_list.push(result);
+		}
+		if(result_list.length ==10){
+			console.log(result_list);
+			break;
+		}
+	}
+
+
+	//先做一个数组存放1-10,每次取一个,删一个
+	var re = [1,2,3,4,5,6,7,8,9,10];
+	var len = re.length;
+	for(var i=0;i<len;i++){
+		var result=Math.round(Math.random()*(re.length-1));
+		console.log(re[result]);
+		re.splice(result,1);
+	}
+	</script>
+</body>
+</html>

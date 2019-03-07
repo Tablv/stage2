@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展示用户信息</title>
+</head>
+<body>
+    <button id="show">展示信息</button>
+    <button id="action">开始游戏</button>
+     <script>
+            var show = document.getElementById('show');
+            show.onclick=function(){
+                var xhr_show = new XMLHttpRequest();
+                xhr_show.open('post','http://172.17.13.39:8000/show_user.html');
+                xhr_show.send(null);
+                xhr_show.onreadystatechange = function(){
+                    if(xhr_show.status==200&&xhr_show.readyState==4){
+                        console.log('发送成功');
+                        var data = JSON.parse(xhr_show.responseText);
+                        var sumStr = "<table><tr> <td>姓名</td><td>"+data.uname+"</td></tr><tr><td>用户id</td><td>"+data.uid+"</td></tr><tr><td>积分</td><td>"+data.ufen+"</td></tr></table>";
+                        sumStr +="<button id='out'>退出</button>";
+                        document.body.innerHTML = sumStr;
+                        var action = document.getElementById('out');
+
+                    }
+                }
+            }
+     </script>
+
+
+</body>
+</html>

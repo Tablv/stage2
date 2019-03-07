@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器广告</title>
+	<style>
+	body{
+		height:5000px;
+	}
+	div{
+		position:fixed;
+		top:50px;
+		/* margin-top:-220px; */
+	}
+	div span{
+		position:absolute;
+		top:10px;
+		right:10px;
+		width:20px;
+		height:20px;
+		line-height:20px;
+		text-align:center;
+		background:#999;
+		border-radius:5px;
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<div id="dd">
+		<span>x</span>
+		<img src='suolong.jpg'>
+	</div>
+	<script>
+	//定时器广告,允许关闭,但是几秒后弹出
+	
+	//绑定响应函数
+	
+	console.log(document.querySelector('div span'));
+	document.querySelector('div span').addEventListener('click',function(event){
+		//隐藏
+		document.querySelector('div').style.display = 'none';
+
+		//添加定时器
+		setTimeout(function(){
+		document.querySelector('div').style.display = 'block';
+		console.log('弹出来');
+		},1000);
+
+	});
+
+	
+	</script>
+</body>
+</html>

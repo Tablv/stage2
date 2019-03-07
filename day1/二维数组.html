@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二维数组</title>
+</head>
+<body>
+	<script>
+	var arr =[[1,2,3,4],[5,6,7,8]];
+	for(i in arr){
+		console.log(arr[i].toString());
+	}
+
+	//定义班级学生为二维数组，并且求出男女比例
+	var cls_sex = [['x',"男","男",'x','x','x'],
+				   ["女","女","女","女","男","男"],
+				   ["x","女","男","男","女","男"],
+				   ["x","女","男","男","女","男"],
+				   ['x','x',"男","男",'x','x']];
+	//定义两个变量，分别记录男女的个数
+	var male = 0;
+	var female = 0;
+	for(var i=0;i<cls_sex.length;i++){
+		for(var j=0;j<cls_sex[i].length;j++){
+			if(cls_sex[i][j] == "男"){
+				male++;
+			}
+			if(cls_sex[i][j] == "女"){
+				female++;
+			}
+		}
+	}
+	console.log(male,female);
+	</script>
+</body>
+</html>

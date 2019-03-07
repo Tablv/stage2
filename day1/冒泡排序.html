@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡排序</title>
+</head>
+<body>
+	<script>
+	var arr = [1,22,55,9,100,108];
+	//找出最大数，并且放到最右边
+	// 相邻位置两两比较
+	for(var i = 0;i<arr.length-1;i++){
+		if(arr[i] > arr[i+1]){
+			var temp = arr[i];
+			arr[i] = arr[i+1];
+			arr[i+1] = temp;
+		}
+	}
+	console.log(arr.toString());
+	</script>
+</body>
+</html>

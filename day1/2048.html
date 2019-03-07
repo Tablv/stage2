@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2048</title>
+</head>
+<body>
+	<script>
+	//2048游戏的结束条件
+	// 1.十六宫格全部铺满了
+	// 当所有有数据为0时，便是没有数据
+	// 一旦遇到0的数据，程序不会结束
+	// 2.相邻各自没有相同的数
+	// 4*4的二维数组
+	// 每个格子遍历一遍，检查右方和下方的格子的数据是否相等
+	// 有些格子，是没有右方和下方的，需要排除特殊情况
+
+	var data = [
+			[8,4,2,8],
+			[4,2,16,2],
+			[2,32,128,8],
+			[4,16,8,2]
+		];
+	//定义一个函数，判断是否有空格子
+	function isFull(){
+		for(var i=0;i<4;i++){
+			for(var j=0;j<4;j++){
+				if(data[i][j]==0){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	function isOver(){
+		if(!isFull()){
+			console.log('还有空格子，游戏继续')
+			return false;
+		}
+		//相邻格子数字是否相等的判断
+		for(var i=0;i<4;i++){
+			for(var j=0;j<4;j++){
+				// 右边格子进行判断
+				if(j<3){//最右边的格子不用跟右边的盒子进行比较
+					if(data[i][j]==data[i][j+1]){
+						console.log(i+"行"+j+"列"+(j+1)+"列" +"相邻格子有相同的数据,游戏继续");
+						return false;
+					}
+				}
+				//下面格子进行判断
+				if(i<3){// 跟下面的格子不用跟下面盒子进行比较
+					if(data[i][j]==data[i+1][j]){
+						console.log(i+"行"+(j+1) +"行"+j+"列"+"相邻格子有相同的数据，游戏继续");
+						return false;
+				}
+				}
+				console.log("游戏结束");
+		}
+	}
+	</script>
+</body>
+</html>

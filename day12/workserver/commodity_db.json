@@ -1,0 +1,10 @@
+{
+"db":{
+  "commodity":[
+    { "imgsrc":"client/image/commodity/美丽说—白领的全球导购_42.png","pname":"苏格兰打卤面","price":3000},
+    { "imgsrc":"client/image/commodity/美丽说—白领的全球导购_43.png","pname":"重庆小面","price":2000},
+    { "imgsrc":"client/image/commodity/美丽说—白领的全球导购_44.png","pname":"兰州拉面","price":3500},
+    { "imgsrc":"client/image/commodity/美丽说—白领的全球导购_45.png","pname":"山西大碗面","price":4700}
+    ],
+  "ico":"client/image/美丽说—白领的全球导购_07.png"}
+}

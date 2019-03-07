@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>栈，队列模拟操作</title>
+</head>
+<body>
+	<script>
+	var arr=[1,66,'hello','xms','Jim'];
+	arr.push("Tom");
+	console.log(arr);
+
+	var re=arr.pop();
+	console.log(re);
+	console.log(arr);
+
+
+	arr.unshift("小明");
+	console.log(arr);
+
+	var re = arr.shift();
+	console.log(re);
+	console.log(arr);
+
+	// 三个人入队列
+	// 
+	// 先进先出
+	var list = [];
+	list.push("小明");
+	list.push("小Hong");
+	list.push("小Gang");
+	console.log(list);
+	for(var i=1;i<5;i++){
+		var sname = list.shift();
+		if(sname ==undefined){
+			console.log("队列已经没有数据");
+			break;
+		}else{
+			console.log(i , sname)
+		}
+		
+	}
+	</script>
+</body>
+</html>

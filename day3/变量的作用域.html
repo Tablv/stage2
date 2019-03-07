@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>变量作用域</title>
+</head>
+<body>
+	<script>
+	//全局变量 在script中任何一个头可以读取
+	var num = 100;
+	function f1(){
+		var p1 = 66; //p1是局部变量,生命周期在前括号中
+		var num =88; //读取变量是由就近原则和
+		//即中国部变量和最大范围重名是,使用更小范围的变量
+		console.log("f1中num"+num);
+		console.log("p1"+p1);
+	}
+	f1();
+	function f2(){
+		num++;
+		console.log("f2中num"+num);
+	}
+	f2();
+	f1();
+
+	for(var i=0;i<3;i++){
+		var tmp = 10;
+		for(var j=0;j<3;j++){
+			var tmp =100;
+			console.log(tmp);
+		}
+	}
+	console.log(tmp);
+	//花括号结束后,for和if会影响更大范围变量的值
+	</script>
+</body>
+</html>

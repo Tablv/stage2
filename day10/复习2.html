@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		try{
+	    	abc();
+	    }catch(e){
+	    	console.log("语法错误");
+	    }
+	    //throw new Error([1001,"自定义异常"]);
+	    console.log("程序继续");
+
+	    //构造函数
+	    function Stu(sname,age){
+			console.log("创建新对象");
+			console.log(this);
+			this.sname = sname;
+			this.age=age;
+			this.intrSelf=function(){
+				console.log(this.sname+this.age);
+			}
+		}
+
+		Stu("Jim",18);//普通调用
+		var s=new Stu("Tom",20);//new
+
+		function XmsStu(){
+			this.school="学码思";
+		}
+		XmsStu.prototype=s;
+		var xstu=new XmsStu();
+		console.log(xstu.sname);
+		console.log(xstu.school);
+
+		function XmsStu2(sname,age){//继承Stu
+			this.school="学码思";
+			//子类继承于父类
+			this.__proto__=new Stu(sname,age);
+		}
+		var xstu2=new XmsStu2("小明",23);
+		console.log(xstu2.sname);
+		console.log(xstu2.school);
+
+		function f1(){
+			//取前五个参数
+			console.log(arguments.constructor);
+			//利用数组的slice方法,call函数的第一个参数是arguments
+			var re=Array.prototype.slice.call(arguments,0,5);
+			console.log(re);
+		}
+		f1(1,2,3,4,5,6);
+
+		console.log([1,2,3,4,5,6].slice(0,5));
+
+		//定义一个构造函数MyArray,提供一个myslice方法
+		function MyArray(mydata){
+			this.mydata=mydata;
+			this.myslice=function(start,end){
+				console.log("自定义slice方法");
+				var re=this.mydata.slice(start,end);
+				re.push(this.mydata[end]);
+				return re;
+			}
+		}
+
+		var m1=new MyArray([1,2,3]);
+		console.log(m1.myslice(0,2));
+
+		//定义父类
+		function Father(sname){
+			this.sname=sname;
+			this.intrSelf=function(){
+				console.log("我是"+this.sname);
+			}
+		}
+		//定义子类
+		function Child(sname){
+			Father.call(this,sname);//用call实现继承
+		}
+
+		 var c=new Child("小明");
+		 c.intrSelf();
+	</script>
+</body>
+</html>

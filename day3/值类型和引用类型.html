@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>值类型和引用类型</title>
+</head>
+<body>
+	<script>
+	//定义值类型
+	var a = 100;
+	//值类型赋值
+	var b = a;
+	console.log(a,b);
+	//b和a是两个不同的内存空间,不会相互影响
+	b=99;
+	console.log(a,b);
+
+	//定义引用类型
+	var arr1 = [100];
+	//引用类型赋值
+	var arr2 = arr1;
+	console.log(arr1,arr2);
+	//arr1 和 arr2 共用同一块内存空间,因为地址是相同的,指向的是同一块
+	arr2.push(99);
+	console.log(arr1,arr2);
+
+
+
+	//值传递  和  引用传递
+	//如果函数参数是用引用类型,
+	//那么函数内部对此参数的修改,会影响外部变量
+	function f1(p1){
+		p1 = 99;    //值传递
+	}
+	var p1 = 100;
+	f1(p1);
+	console.log(p1);
+
+	function f2(p2){
+		p2.push(99);  //引用传递
+	}
+	var p2 = [100];
+	f2(p2);  //引用传递可能会修改数据本身
+	console.log(p2);
+
+	</script>
+</body>
+</html>
